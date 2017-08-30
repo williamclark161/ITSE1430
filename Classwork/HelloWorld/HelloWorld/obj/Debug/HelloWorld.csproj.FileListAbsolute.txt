@@ -1,0 +1,6 @@
+H:\CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\HelloWorld\HelloWorld\bin\Debug\HelloWorld.exe.config
+H:\CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\HelloWorld\HelloWorld\bin\Debug\HelloWorld.exe
+H:\CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\HelloWorld\HelloWorld\bin\Debug\HelloWorld.pdb
+H:\CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\HelloWorld\HelloWorld\obj\Debug\HelloWorld.csprojResolveAssemblyReference.cache
+H:\CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\HelloWorld\HelloWorld\obj\Debug\HelloWorld.exe
+H:\CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\HelloWorld\HelloWorld\obj\Debug\HelloWorld.pdb
