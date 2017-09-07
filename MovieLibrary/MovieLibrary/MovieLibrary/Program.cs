@@ -15,7 +15,8 @@ namespace MovieLibrary {
         {
             // Declaring Global Variables
             int totalMovies = 0;
-            string[] movieLibrary = new string[totalMovies];
+            string[] movieLibrary = new string[1];
+            //movieLibrary[0] = "EMPTY";
 
             // Welcoming the user
             Console.WriteLine("Welcome to CocoaVision's Movie Library.  Brought to you by Crestworld Studios");
@@ -89,10 +90,17 @@ namespace MovieLibrary {
         static void listMovies(string [] library, int movieCount)
         {
             Console.WriteLine();
-            Console.WriteLine("List of movies in the library");
-            for (int position = 0; position < movieCount; position++)
+            if (movieCount == 0)
             {
-                Console.WriteLine(library[position]);
+                Console.WriteLine("Movie Library is currently empty.");
+            }
+            else
+            {
+                Console.WriteLine("List of movies in the library");
+                for (int position = 0; position < movieCount; position++)
+                {
+                    Console.WriteLine(library[position]);
+                }
             }
         }
 
@@ -101,6 +109,7 @@ namespace MovieLibrary {
         {
             Console.WriteLine();
             Console.Write("Enter The Name Of The Movie You Want To Add: ");
+            Console.WriteLine();
             bool added = false;
             string movie = Console.ReadLine();
             for (int position = 0; !added; position++)
@@ -108,6 +117,8 @@ namespace MovieLibrary {
                 if (library[position] == "")
                 {
                     library[position] = movie;
+                    Console.WriteLine(movie + " has been added to the library");
+                    Console.WriteLine();
                     added = true;
                 }
             }
@@ -139,14 +150,16 @@ namespace MovieLibrary {
                     else
                     {
                         Console.WriteLine(movie + " is not in movie library");
+                        Console.WriteLine();
                     }
                 }
-                return movieCount;
             }
             else
             {
                 Console.WriteLine("There are no movies in the library to remove");
+                Console.WriteLine();
             }
+            return movieCount;
         }
     }
 }
