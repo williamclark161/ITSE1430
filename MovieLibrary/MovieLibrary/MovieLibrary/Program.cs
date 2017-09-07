@@ -95,7 +95,7 @@ namespace MovieLibrary {
             }
             else
             {
-                Console.WriteLine("There are no movies in the library to remove")
+                Console.WriteLine("There are no movies in the library to remove");
             }
             
 
