@@ -76,5 +76,29 @@ namespace MovieLibrary {
             Console.Write("What would you like to do?");
             return Console.ReadLine(); ;
         }
+
+        // Function to Ad a Movie to the Library
+        static int removeMovie(string [] movieLibrary, int movieCount)
+        {
+            Console.WriteLine();
+            if (movieCount > 0)
+            {
+                Console.Write("Enter The Name Of The Movie You Want To Remove: ");
+                string movie = Console.ReadLine();
+                for (int position = 0; position < movieCount; position++)
+                {
+                    if (movieLbrary[position] == movie)
+                    {
+                        if ()
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no movies in the library to remove")
+            }
+            
+
+        }
     }
 }
