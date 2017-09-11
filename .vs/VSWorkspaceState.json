@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MovieLibrary",
+    "\\MovieLibrary\\MovieLibrary",
+    "\\MovieLibrary\\MovieLibrary\\MovieLibrary"
   ],
+  "SelectedNode": "\\MovieLibrary\\MovieLibrary\\MovieLibrary\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
