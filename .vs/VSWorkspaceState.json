@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\MovieLibrary",
-    "\\MovieLibrary\\MovieLibrary",
-    "\\MovieLibrary\\MovieLibrary\\MovieLibrary"
+    "\\Classwork",
+    "\\Classwork\\MovieLibrary",
+    "\\Classwork\\MovieLibrary\\MovieLibrary",
+    "\\Classwork\\MovieLibrary\\MovieLibrary\\MovieLibrary",
+    "\\Classwork\\Nile",
+    "\\Classwork\\Nile\\Nile.Host"
   ],
-  "SelectedNode": "\\MovieLibrary\\MovieLibrary\\MovieLibrary\\Program.cs",
+  "SelectedNode": "\\Classwork\\Nile\\Nile.Host\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

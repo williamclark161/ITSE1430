@@ -30,11 +30,6 @@ namespace Nile.Host
             } while (!quit);
         }
 
-        /*private static void ListProducts()
-        {
-            throw new NotImplementedException();
-        }*/
-
         private static void AddProduct()
         {
             Console.Write("Enter product name: ");
@@ -56,10 +51,24 @@ namespace Nile.Host
             // Check answer
         }
 
+        private static void ListProducts()
+        {
+            // Name $price (Discontinued)
+            // Discription
+            //string message = String.Format("{0}\t\t\t${1}\t\t{2}", productName, productPrice,
+            //    productDiscontinued ? "[Discontinued]" : "");
+            string message = $"{productName}\t\t\t${productPrice}\t\t{(productDiscontinued ? "[Discontinued]" : "")}";
+
+            Console.WriteLine(message);
+            Console.WriteLine(productDescription);
+            Console.WriteLine();
+       }
+
         static char GetInput()
         {
             while (true)
             {
+                Console.WriteLine();
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("".PadLeft(10), "-");
                 Console.WriteLine("(A)dd Product");
