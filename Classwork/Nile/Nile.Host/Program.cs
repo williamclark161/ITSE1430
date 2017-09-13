@@ -22,7 +22,7 @@ namespace Nile.Host
                     case 'l':
                     case 'L': ListProducts(); break;
 
-                    
+
 
                     case 'q':
                     case 'Q': quit = true; break;
@@ -38,7 +38,7 @@ namespace Nile.Host
             // Ensure not Empty
 
             Console.Write("Enter price (> 0): ");
-            string price = Console.ReadLine().Trim();
+            productPrice = ReadDecimal();
 
             // Check price
 
@@ -62,7 +62,7 @@ namespace Nile.Host
             Console.WriteLine(message);
             Console.WriteLine(productDescription);
             Console.WriteLine();
-       }
+        }
 
         static char GetInput()
         {
@@ -134,6 +134,15 @@ namespace Nile.Host
 
             // Option 6 - Preferred Approach Going Forward
             string format3 = $"{name} worked for {hours} hours";*/
+
+        /// <summary>Reads a decimal from Console.</summary>
+        ///
+        static decimal ReadDecimal()
+        {
+            string input = Console.ReadLine();
+
+            return Decimal.Parse(input);
+        }
 
         // Product
         static string productName;

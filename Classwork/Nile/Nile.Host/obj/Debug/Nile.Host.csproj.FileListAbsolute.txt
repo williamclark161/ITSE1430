@@ -4,3 +4,6 @@ H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nil
 H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.pdb
 H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.exe
 H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.pdb
+C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.csprojResolveAssemblyReference.cache
+C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.exe
+C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.pdb
