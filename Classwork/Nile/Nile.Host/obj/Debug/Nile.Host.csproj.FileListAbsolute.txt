@@ -1,0 +1,6 @@
+H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.csprojResolveAssemblyReference.cache
+H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.exe.config
+H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.exe
+H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.pdb
+H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.exe
+H:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.pdb
