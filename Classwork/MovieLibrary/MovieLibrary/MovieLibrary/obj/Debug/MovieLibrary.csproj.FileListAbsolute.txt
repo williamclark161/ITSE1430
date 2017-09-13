@@ -11,3 +11,9 @@ C:\Users\William\Documents\Education\Progamming\CSharp\source\repos\Projects\Mov
 C:\Users\William\Documents\Education\Progamming\CSharp\source\repos\Projects\MovieLibrary\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.exe.config
 C:\Users\William\Documents\Education\Progamming\CSharp\source\repos\Projects\MovieLibrary\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.exe
 C:\Users\William\Documents\Education\Progamming\CSharp\source\repos\Projects\MovieLibrary\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.pdb
+H:\ITSE1430_CSharpProgramming\source\repo\Classwork\MovieLibrary\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.exe.config
+H:\ITSE1430_CSharpProgramming\source\repo\Classwork\MovieLibrary\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.exe
+H:\ITSE1430_CSharpProgramming\source\repo\Classwork\MovieLibrary\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.pdb
+H:\ITSE1430_CSharpProgramming\source\repo\Classwork\MovieLibrary\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.csprojResolveAssemblyReference.cache
+H:\ITSE1430_CSharpProgramming\source\repo\Classwork\MovieLibrary\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.exe
+H:\ITSE1430_CSharpProgramming\source\repo\Classwork\MovieLibrary\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.pdb

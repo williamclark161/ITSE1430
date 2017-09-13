@@ -22,16 +22,18 @@ namespace Nile.Host
                     case 'l':
                     case 'L': ListProducts(); break;
 
+                    
+
                     case 'q':
                     case 'Q': quit = true; break;
                 };
             } while (!quit);
         }
 
-        private static void ListProducts()
+        /*private static void ListProducts()
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         private static void AddProduct()
         {
@@ -132,5 +134,5 @@ namespace Nile.Host
 
 
 
-        }
+    }
 }

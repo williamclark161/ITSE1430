@@ -12,25 +12,27 @@ using System.Threading.Tasks;
 namespace MovieLibrary {
     class Program 
     {
+        // Declaring & Initializing Global Variable(s)
+        static string movieTitle = "";
+        static string movieDescription = "";
+        static int movieLength = 0;
+        static bool ownMovie = "";
+        
         static void Main(string[] args)
         {
-            // Declaring & Initializing Global Variable(s)
-            string[] movieLibrary = new string[4];
-            resetLibrary(movieLibrary);
-
             // Welcoming User
-            greetUser();
+            GreetUser();
             
             // Display Menu and Recieve User Choice
-            string userChoice = displayMenu();
-            performChoice(userChoice,movieLibrary);
+            char userChoice = DisplayMenu();
+            PerformChoice(userChoice,movieLibrary);
 
             // End Program
-            thankUser();
+            ThankUser();
         }
 
         //Greeting User and Giving Instructions
-        static void greetUser()
+        static void GreetUser()
         {
             // Display Welcome
             Console.WriteLine("Welcome to CocoaVision's Movie Library.  Brought to you by Crestworld Studios");
@@ -42,7 +44,7 @@ namespace MovieLibrary {
             Console.WriteLine();
         }
         // Initializing Movie Library
-        static void resetLibrary(string [] currentLibrary)
+        /*static void ResetLibrary(string [] currentLibrary)
         {
             for (int position = 0; position < 4; position++)
             {
@@ -55,46 +57,65 @@ namespace MovieLibrary {
                     currentLibrary[position] = "";
                 }
             }
-        }
+        }*/
         
         // Function to Display Menu
-        static string displayMenu()
+        static char displayMenu()
         {
-            Console.WriteLine("CocoaVision Movie Library Menu");
-            Console.WriteLine("1. (L)ist Movies");
-            Console.WriteLine("2. (A)dd Movie");
-            Console.WriteLine("3. (R)emove Movie");
-            Console.WriteLine("4. (Q)uit");
-            Console.WriteLine();
-            Console.Write("What would you like to do? ");
-            return Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("CocoaVision Movie Library Menu");
+                Console.WriteLine("1. (L)ist Movies");
+                Console.WriteLine("2. (A)dd Movie");
+                Console.WriteLine("3. (R)emove Movie");
+                Console.WriteLine("4. (Q)uit");
+                Console.WriteLine();
+                Console.Write("What would you like to do? ");
+            
+                string choice = Console.ReadLine();
+                if (input != null && input.Length != 0)
+                {
+                    char letter = Char.ToUpper(input[0]);
+                        if (letter == 'A')
+                        {
+                            return 'A';
+                        }
+                        else if (letter == 'L')
+                        {
+                            return 'L';
+                        }
+                        else if (letter == 'Q')
+                        {
+                            return 'Q';
+                        }
+                };
+                Console.WriteLine("Invalid Choice!!  Please enter first letter of the following choices"); 
+                Console.WriteLine();
+            };
         }
 
         // Perform Function of Menu Choice
-        static void performChoice(string choice, string [] movies)
+        static void PerformChoice(string choice, string [] movies)
         {
-            while (choice != "Q")
+            bool quit = false;
+            do
             {
-                while (choice != "q")
+                switch (choice)
                 {
-                    switch (choice)
-                    {
-                        case ("L"): listMovies(movies); break;
-                        case ("l"): listMovies(movies); break;
-                        case ("A"): addMovie(movies); break;
-                        case ("a"): addMovie(movies); break;
-                        case ("R"): removeMovie(movies); break;
-                        case ("r"): removeMovie(movies); break;
-                        default: Console.WriteLine("Invalid Choice!!  Please enter first letter of the following choices"); Console.WriteLine(); break;
-                    }
-                    choice = displayMenu(); 
-                }
-                break;
-            }
+                    case ("L"):
+                    case ("l"): ListMovies(movies); break;
+                    case ("A"):
+                    case ("a"): AddMovie(movies); break;
+                    case ("R"):
+                    case ("r"): RemoveMovie(movies); break;
+                    case ("Q"):
+                    case ("q"): quit = true; break;
+                };
+            } while (!quit);
         }
         
         // Function to Display the Entire Movie Library
-        static void listMovies(string [] library)
+        static void ListMovies(string [] library)
         {
             
             Console.WriteLine();
@@ -104,47 +125,50 @@ namespace MovieLibrary {
             }
             else
             {
-                Console.WriteLine("Title: " + library[0]);
-                Console.WriteLine("Description: " + library[1]);
-                Console.WriteLine("Run Length: " + library[2]);
-                Console.WriteLine("Status: " + library[3]);
+                Console.WriteLine("Title: " + movieTitle);
+                Console.WriteLine("Description: " + movieDescription);
+                Console.WriteLine("Run Length: " + movieLength);
+                if (ownMovie)
+                    Console.WriteLine("Status: Owned");
+                else
+                    Console.WriteLine("Status: Not Owned");
             }
             Console.WriteLine();
         }
 
         // Function to Add a Movie to the Library
-        static void addMovie(string [] library)
+        static void AddMovie(string [] library)
         {
             Console.WriteLine();
             
             // Getting Movie Title from User
             Console.Write("Enter a Title (Required & Case Sensitive): ");
-            string movie = Console.ReadLine();
-            while (movie == "")
+            movieTitle = Console.ReadLine();
+            while (movieTitle == "")
             {
                 Console.Write("You must enter an actual title: ");
-                movie = Console.ReadLine();
+                movieTitle = Console.ReadLine();
             }
-            library[0] = movie;
-
+            
             // Getting Movie Description from User
             Console.Write("Enter a discription (Optional): ");
-            library[1] = Console.ReadLine();
+            movieDescription = Console.ReadLine();
 
             // Getting Movie Time Length from User
             bool validLength = false;
+            string length = "";
             Console.Write("Enter movie length in minutes (Optional): ");
             do 
             {
-                library[2] = Console.ReadLine();
-                if (library[2] == "")
+                length = Console.ReadLine();
+                if (length == "")
                 {
-                    library[2] = "0";
+                    length = "0";
                     validLength = true;
                 }
                 else
                 {
-                    if (Convert.ToInt32(library[2]) < 0)
+                    if (Convert.ToInt32(length) < 0)
                     {
                         Console.Write("You must enter a value >= 0: ");
                     }
@@ -154,6 +178,7 @@ namespace MovieLibrary {
                     }
                 }
             } while (!validLength);
+            movieLength = Convert.ToInt32(length);
             
             // Seeing if Movie is Owned by User
             Console.Write("Do you own this movie (Y/N)? ");
@@ -163,27 +188,38 @@ namespace MovieLibrary {
             {
                 switch(answer)
                 {
-                    case "y": validAnswer = true; library[3] = "Owned"; break;
-                    case "Y": validAnswer = true; library[3] = "Owned"; break;
-                    case "yes": validAnswer = true; library[3] = "Owned"; break;
-                    case "Yes": validAnswer = true; library[3] = "Owned"; break;
-                    case "YES": validAnswer = true; library[3] = "Owned"; break;
-                    case "n": validAnswer = true; library[3] = "Not Owned"; break;
-                    case "N": validAnswer = true; library[3] = "Not Owned"; break;
-                    case "no": validAnswer = true; library[3] = "Not Owned"; break;
-                    case "No": validAnswer = true; library[3] = "Not Owned"; break;
-                    case "NO": validAnswer = true; library[3] = "Not Owned"; break;
+                    case "y":
+                    case "Y":
+                    case "yes":
+                    case "Yes":
+                    case "YES": validAnswer = true; ownMovie = true; break;
+                    case "n":
+                    case "N":
+                    case "no":
+                    case "No":
+                    case "NO": validAnswer = true; ownMovie = false; break;
                     default: Console.Write("You must enter Yes or No (Y/N): "); answer = Console.ReadLine(); break;
                 }
             }
             Console.WriteLine();
         }
 
+        static string GetTitle()
+        {
+            Console.Write("Enter a Title (Required & Case Sensitive): ");
+            string movie = Console.ReadLine();
+            while (movie == "")
+            {
+                Console.Write("You must enter an actual title: ");
+                movie = Console.ReadLine();
+            }
+            return movie;
+        }
         // Function to Remove a Movie from the Library
-        static void removeMovie(string [] library)
+        static void RemoveMovie(string [] library)
         {
             Console.WriteLine();
-            if (library[0] == "")
+            if (movieTitle == "")
             {
                 Console.WriteLine("Movie Library is currently empty.");
             }
@@ -191,20 +227,33 @@ namespace MovieLibrary {
             {
                 Console.Write("Enter The Name Of The Movie You Want To Remove (Case Sensitive): ");
                 string movie = Console.ReadLine();
-                if (movie == library[0])
+                if (movie == movieTitle)
                 {
                     bool validAnswer = false;
-                    Console.Write("Are you sure you want to remove '" + movie + "' from the library(Y/N)? ");
+                    Console.Write("Are you sure you want to remove '" + movieTitle + "' from the library(Y/N)? ");
                     while (!validAnswer)
                     {
                         string answer = Console.ReadLine();
                         switch (answer)
                         {
-                            case "Y": validAnswer = true; resetLibrary(library); break;
-                            case "y": validAnswer = true; resetLibrary(library); break;
-                            case "N": validAnswer = true; break;
-                            case "n": validAnswer = true; break;
-                            default: Console.Write("Please enter Y/N: "); answer = Console.ReadLine(); break;
+                            case "Y": 
+                            case "y": 
+                                validAnswer = true; 
+                                movieTitle = ""; 
+                                movieDescription = "";
+                                movieLength = 0;
+                                ownMovie = false;
+                                break;
+
+                            case "N":
+                            case "n":
+                                validAnswer = true; 
+                                break;
+
+                            default: 
+                                Console.Write("Please enter Y/N: "); 
+                                answer = Console.ReadLine(); 
+                                break;
                         }
                         Console.WriteLine();
                     }
