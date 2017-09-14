@@ -2,12 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Classwork",
-    "\\Classwork\\MovieLibrary",
-    "\\Classwork\\MovieLibrary\\MovieLibrary",
-    "\\Classwork\\MovieLibrary\\MovieLibrary\\MovieLibrary",
     "\\Classwork\\Nile",
     "\\Classwork\\Nile\\Nile.Host"
   ],
-  "SelectedNode": "\\Classwork\\Nile\\Nile.sln",
+  "SelectedNode": "\\Classwork\\Nile",
   "PreviewInSolutionExplorer": false
 }
