@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nile.Host
-{
-    class Program
-    {
+namespace Nile.Host {
+    class Program {
         static void Main(string[] args)
         {
             bool quit = false;
@@ -46,7 +44,7 @@ namespace Nile.Host
             productDescription = Console.ReadLine().Trim();
 
             Console.Write("Is it discontined (Y/N)? ");
-            string discontinued = Console.ReadLine().Trim();
+            productDiscontinued = ReadYesNo();
 
             // Check answer
         }
@@ -73,7 +71,7 @@ namespace Nile.Host
                 Console.WriteLine("".PadLeft(10), "-");
                 Console.WriteLine("(A)dd Product");
                 Console.WriteLine("(L)ist Products");
-                Console.WriteLine("Q)uit");
+                Console.WriteLine("(Q)uit");
 
                 string input = Console.ReadLine().Trim();
 
@@ -137,11 +135,70 @@ namespace Nile.Host
 
         /// <summary>Reads a decimal from Console.</summary>
         ///
+        static bool ReadYesNo()
+        {
+            do
+            {
+                string input = Console.ReadLine();
+
+                bool result;
+                //if (Boolean.TryParse(input, out result))
+                //    return result;
+
+                if (!String.IsNullOrEmpty(input))
+                {
+                    switch (Char.ToUpper(input[0]))
+                    {
+                        case 'Y': return true;
+                        case 'N': return false;
+                    };
+                };
+
+                Console.Write("Enter either Y or N: ");
+            } while (true);
+        }
+
+        /// <summary> Reads a string from Console </summary>
+        /// <param name="errorMessage"></param>
+        /// <param name="allowEmpty"></param>
+        /// <returns></returns>
+        static string ReadString(string errorMessage, bool allowEmpty)
+        {
+            //if (errorMessage == null)
+            //    errorMessage = "Enter a valid string";
+            //else
+            //  errorMessage = erroeMessage.Trim();
+            // null coalesce
+            errorMessage = errorMessage ?? "Enter a valid string";
+
+            // null conditional
+            errorMessage = errorMessage?.Trim();
+
+            do
+            {
+                string input = Console.ReadLine();
+                if (String.IsNullOrEmpty(input) && allowEmpty)
+                    return "";
+                else if (!String.IsNullOrEmpty(input))
+                    return input;
+                        
+                Console.WriteLine(errorMessage);
+            } while (true);
+        }
+
+        
         static decimal ReadDecimal()
         {
-            string input = Console.ReadLine();
+            do
+            {
+                string input = Console.ReadLine();
 
-            return Decimal.Parse(input);
+                // decimal result;
+                if (Decimal.TryParse(input, out decimal result))
+                    return result;
+
+                Console.WriteLine("Enter a valid decimal: ");
+            } while (true);
         }
 
         // Product

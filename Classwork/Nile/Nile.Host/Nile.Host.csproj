@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{784A981F-2A61-410F-8D42-7DD39B1D9B7A}</ProjectGuid>
+    <ProjectGuid>{8B237EF0-C3A0-4939-BEF8-10EE895CA5BD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Nile.Host</RootNamespace>
     <AssemblyName>Nile.Host</AssemblyName>
@@ -42,9 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="F:\ITSE1430_CSharpProgramming\ITSE1430-master\ITSE1430-master\Classwork\Nile\Nile.Host\Program.cs">
-      <Link>Program.cs</Link>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
