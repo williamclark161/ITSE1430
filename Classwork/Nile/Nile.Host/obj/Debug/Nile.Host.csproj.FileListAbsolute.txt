@@ -1,6 +1,0 @@
-C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.exe.config
-C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.exe
-C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\bin\Debug\Nile.Host.pdb
-C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.csprojResolveAssemblyReference.cache
-C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.exe
-C:\Users\william.clark161\Source\Repos\ITSE1430\Classwork\Nile\Nile.Host\obj\Debug\Nile.Host.pdb
