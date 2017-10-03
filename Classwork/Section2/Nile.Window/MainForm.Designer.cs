@@ -1,5 +1,7 @@
-﻿namespace Nile.Window {
-    partial class MainForm {
+﻿namespace Nile.Windows
+{
+    partial class MainForm
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -31,9 +33,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(364, 40);
+            this.button1.Location = new System.Drawing.Point(152, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 21);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -43,10 +45,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 289);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.button1);
             this.Name = "MainForm";
-            this.Text = "Nile";
+            this.Text = "MainForm";
             this.ResumeLayout(false);
 
         }
@@ -56,4 +58,3 @@
         private System.Windows.Forms.Button button1;
     }
 }
-
