@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Nile.Windows
+namespace Nile.Window
 {
     public partial class ProductDetailForm : Form
     {
@@ -41,8 +41,6 @@ namespace Nile.Windows
                 _txtPrice.Text = Product.Price.ToString();
                 _chkDiscontinued.Checked = Product.IsDiscontinued;
             };
-
-            ValidateChildren();
         }
 
         /// <summary>Gets or sets the product being shown.</summary>
@@ -51,16 +49,11 @@ namespace Nile.Windows
 
         private void OnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateChildren())
-            {
-                return;
-            }
-
             var product = new Product();
             product.Name = _txtName.Text;
             product.Description = _txtDescription.Text;
 
-            product.Price = GetPrice(_txtPrice);
+            product.Price = GetPrice();
             product.IsDiscontinued = _chkDiscontinued.Checked;
 
             //Add validation
@@ -88,13 +81,13 @@ namespace Nile.Windows
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private decimal GetPrice( TextBox conrtol )
+        private decimal GetPrice()
         {
             if (Decimal.TryParse(_txtPrice.Text, out decimal price))
                 return price;
 
-            //Validate price            
-            return -1;
+            //TODO: Validate price            
+            return 0;
         }
 
         private void ProductDetailForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -124,30 +117,6 @@ namespace Nile.Windows
         private void ProductDetailForm_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-        }
-
-        private void ValidatingPrice(object sender, CancelEventArgs e)
-        {
-            var tb = sender as TextBox;
-
-            if (GetPrice(tb) < 0)
-            {
-                e.Cancel = true;
-                _errors.SetError(_txtPrice, "Price must be >=0");
-            }else
-                _errors.SetError(_txtPrice, "");
-        }
-
-        private void ValidatingName(object sender, EventArgs e)
-        {
-            var tb = sender as TextBox;
-
-            if (String.IsNullOrEmpty(tb.Text))
-            {
-                _errors.SetError(tb, "Name Is Required");
-            }
-            else
-                _errors.SetError(tb, "");
         }
     }
 }
