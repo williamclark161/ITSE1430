@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Nile.Window
+namespace Nile.Windows
 {
     static class Program
     {
@@ -14,10 +14,10 @@ namespace Nile.Window
         [STAThread]
         static void Main()
         {
-            var product = new Product();
+            /*var product = new Product();
             //product.Name = "Product A";
             var price = product.GetDiscountedPrice();
-            var name = product.Name;
+            var name = product.Name;*/
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
