@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BD5B4068-AAD6-4911-B449-4DBC2587B7B4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Nile.Window</RootNamespace>
+    <RootNamespace>Nile.Windows</RootNamespace>
     <AssemblyName>Nile.Window</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -82,6 +82,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
