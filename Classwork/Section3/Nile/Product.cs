@@ -17,41 +17,39 @@ namespace Nile
             //Cross field initialization
         }
 
-        private string _name;
-        private string _description;
-
-        /// <summary>
-        /// Gets or sets the unique identifier
-        /// </summary>
+        /// <summary>Gets or sets the unique identifier.</summary>
         public int Id { get; set; }
-        
-        //private readonly double _someValueICannotChange = 10;
 
         //public readonly Product None = new Product();
-        
-        /// <summary> Set the name. </summary>
-        /// <value> Never Return NULL </value>
+
+        /// <summary>Gets or sets the name.</summary>
+        /// <value>Never returns null.</value>
         public string Name
         {
-            // string get_Name()
-            get { return _name ?? ""; }
-            // void set_Name (string value)
-            set { _name = value?.Trim(); }
+            // string get_Name ()
+            get
+            {
+                return _name ?? "";
+            }
 
+            // void set_Name ( string value )
+            set
+            {
+                _name = value?.Trim();
+            }
         }
 
-        /// <summary> Set the discription. </summary>
-        /// <value> Never Return NULL </value>
+        /// <summary>Gets or sets the description.</summary>
         public string Description
         {
             get { return _description ?? ""; }
             set { _description = value?.Trim(); }
         }
 
-        /// <summary> Gets or sets the price. </summary>
-        public decimal Price { get; set; }
+        /// <summary>Gets or sets the price.</summary>
+        public decimal Price { get; set; } = 0;
 
-        /// <summary> Determines if Discontinued. </summary>
+        /// <summary>Determines if discontinued.</summary>
         public bool IsDiscontinued { get; set; }
 
         public const decimal DiscontinuedDiscountRate = 0.10M;
@@ -69,13 +67,12 @@ namespace Nile
             }
         }
 
-
         public override string ToString()
         {
             return Name;
         }
 
-        //Size of the Product
+        //Size of the product
         public int[] Sizes
         {
             get
@@ -85,10 +82,11 @@ namespace Nile
 
                 return copySizes;
             }
-
         }
 
         private int[] _sizes = new int[4];
+
+        //public abstract string Validate2();
 
         /// <summary>Validates the object.</summary>
         /// <returns>The error message or null.</returns>
@@ -105,25 +103,12 @@ namespace Nile
             return null;
         }
 
-        /// <summary> Get the discounted price, If applicable. </summary>
-        /// <returns> The price </returns>
-        public decimal GetDiscountedPrice
-        {
-            get
-            {
-                //if (IsDiscontinued)
-                if (this.IsDiscontinued)
-                    return Price * DiscontinuedDiscountRate;
+        //public int ICanOnlySetIt { get; private set; }
+        //public int ICanOnlySetIt2 { get; }
 
-                return Price;
-            }
-        }
+        private string _name;
+        private string _description;
 
-        //public int ICanOnlySet { get; private set; }
-        //public int ICanOnlySet2 { get; }
-
-        public void Foo(string name)
-        {
-        }
+        //private readonly double _someValueICannotChange = 10;
     }
 }

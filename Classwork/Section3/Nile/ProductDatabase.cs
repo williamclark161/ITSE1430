@@ -13,78 +13,81 @@ namespace Nile
         public ProductDatabase()
         {
             var product = new Product();
-            product.Name = "Galaxy 8";
-            product.Price = 250;
+            product.Name = "Galaxy S7";
+            product.Price = 650;
+            Add(product);
 
             product = new Product();
             product.Name = "Samsung Note 7";
             product.Price = 150;
             product.IsDiscontinued = true;
+            Add(product);
 
             product = new Product();
             product.Name = "Windows Phone";
             product.Price = 100;
+            Add(product);
 
             product = new Product();
             product.Name = "iPhone X";
-            product.Price = 1980;
+            product.Price = 1900;
             product.IsDiscontinued = true;
+            Add(product);
         }
-        
-        /// <summary> Add a product </summary>
-        /// <param name="product"> The product to add</param>
+
+        /// <summary>Adds a product.</summary>
+        /// <param name="product">The product to add.</param>
         /// <returns>The added product.</returns>
-        public Product Add (Product product)
+        public Product Add(Product product)
         {
-            // TODO: Validate
+            //TODO: Validate
             if (product == null)
                 return null;
             if (!String.IsNullOrEmpty(product.Validate()))
                 return null;
 
-            // Emulante databese by story copy
+            //Emulate database by storing copy
             var newProduct = CopyProduct(product);
-            _list.Add(newProduct);
+            _products.Add(newProduct);
             newProduct.Id = _nextId++;
-        
 
             return CopyProduct(newProduct);
+
             //var item = _list[0];
 
             //TODO: Implement Add
             //return product;
         }
 
-        /// <summary> Get a specific product </summary>
+        /// <summary>Get a specific product.</summary>
         /// <returns>The product, if it exists.</returns>
         public Product Get(int id)
         {
-            //  TODO: Validate
+            //TODO: Validate
             if (id <= 0)
                 return null;
 
             var product = FindProduct(id);
 
-            return (product != null ? CopyProduct(product) : null;
+            return (product != null) ? CopyProduct(product) : null;
         }
 
-        /// <summary>
-        /// Gets all products
-        /// </summary>
+        /// <summary>Gets all products.</summary>
         /// <returns>The products.</returns>
         public Product[] GetAll()
         {
-            var items = new Product[_list.Count];
+            var items = new Product[_products.Count];
             var index = 0;
-            foreach (var product in _list)
+            foreach (var product in _products)
                 items[index++] = CopyProduct(product);
 
             return items;
+            //How many products?
             //var count = 0;
-            //foreach(var product in _products)
+            //foreach (var product in _products)
             //{
             //    if (product != null)
-            //        count++;
+            //        ++count;
             //};
 
             //var items = new Product[count];
@@ -96,54 +99,55 @@ namespace Nile
             //        //product = new Product();
             //        items[index++] = CopyProduct(product);
             //};
+
             //return items;
         }
 
-        /// <summary> Removes the product </summary>
+        /// <summary>Removes the product.</summary>
         /// <param name="product">The product to remove.</param>
-        public void Remove (int id)
+        public void Remove(int id)
         {
+            //TODO: Validate
             if (id <= 0)
                 return;
 
             var product = FindProduct(id);
             if (product != null)
-                _list.Remove(product);
+                _products.Remove(product);
 
-            
-                //if (_list[index].Name == product.Name)
-                //{
-                //    _list.RemoveAt(index);
-                //    break;
-                //};
-            };
+            //if (_list[index].Name == product.Name)
+            //{
+            //    _list.RemoveAt(index);
+            //    break;
+            //};        
         }
 
-        /// <summary> Update a product </summary>
-        /// <param name="product">The product to update</param>
-        /// <returns></returns>
-        public Product Update (Product product)
+        /// <summary>Updates a product.</summary>
+        /// <param name="product">The product to update.</param>
+        /// <returns>The updated product.</returns>
+        public Product Update(Product product)
         {
+            //TODO: Validate
             if (product == null)
                 return null;
-        if (!String.IsNullOrEmpty(product.Validate()))
-            return null;
-            
+            if (!String.IsNullOrEmpty(product.Validate()))
+                return null;
+
+            //Get existing product
             var existing = FindProduct(product.Id);
             if (existing == null)
                 return null;
 
+            //Replace 
+            _products.Remove(existing);
 
-            _list.Remove(existing);
-            // Emulante databese by story copy
-           
             var newProduct = CopyProduct(product);
-            _list.Add(newProduct);
+            _products.Add(newProduct);
 
             return CopyProduct(newProduct);
         }
 
-        private Product CopyProduct (Product product)
+        private Product CopyProduct(Product product)
         {
             if (product == null)
                 return null;
@@ -157,19 +161,21 @@ namespace Nile
             return newProduct;
         }
 
-        private Product FindProduct (int id)
+        //Find a product by ID
+        private Product FindProduct(int id)
         {
-            foreach (var product in _list)
+            foreach (var product in _products)
             {
                 if (product.Id == id)
                     return product;
-            }
+            };
 
-            return null;    
+            return null;
         }
 
-        // private Product[] _products = new Product[100];
-        private List<Product> _list = new List<Product>();
+        //private Product[] _products = new Product[100];
+        private List<Product> _products = new List<Product>();
         private int _nextId = 1;
+        //private List<int> _ints;
     }
 }

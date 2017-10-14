@@ -112,7 +112,6 @@
             this._txtName.Name = "_txtName";
             this._txtName.Size = new System.Drawing.Size(254, 20);
             this._txtName.TabIndex = 0;
-            this._txtName.Validated += new System.EventHandler(this.ValidatingName);
             // 
             // _txtDescription
             // 
@@ -132,7 +131,6 @@
             this._txtPrice.Name = "_txtPrice";
             this._txtPrice.Size = new System.Drawing.Size(100, 20);
             this._txtPrice.TabIndex = 2;
-            this._txtPrice.Validating += new System.ComponentModel.CancelEventHandler(this.ValidatingPrice);
             // 
             // _errors
             // 
