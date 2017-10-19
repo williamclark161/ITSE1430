@@ -103,7 +103,10 @@ namespace Nile
 
         //    return null;
         //}
+        //IEnumerable<ValidationResult> IValidatableObject.Validate (ValidationContext validationContext)
+        //{
 
+        //}
         public IEnumerable<ValidationResult> Validate (ValidationContext validationContext)
         {
             //var errors = new List<ValidationResult>();
