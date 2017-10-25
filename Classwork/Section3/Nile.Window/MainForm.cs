@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -45,17 +47,30 @@ namespace Nile.Windows
         private Product GetSelectedProduct()
         {
             // return _listProducts.SelectedItem as Product;
+            if (_gridProducts.SelectedRows.Count > 0)
+                return _gridProducts.SelectedRows[0].DataBoundItem as Product;
+
             return null;
         }
 
+        private List<Product> _products = new List<Product>();
         private void UpdateList()
         {
             //_listProducts.Items.Clear();
             //foreach (var product in _database.GetAll())
             //    _listProducts.Items.Add(product);
 
+            //new BindingList<Product>();
+
+            // var bs = new BindingSource();
+
+            _bsProducts.DataSource = _database.GetAll().ToList();
             
-            _gridProducts.DataSource = _database.GetAll().ToList();
+            //_products.Clear();
+            //_products.AddRange(_database.GetAll());
+
+            //_gridProducts.DataSource = null;
+            //_gridProducts.DataSource = _products;
         }
 
         private void OnFileExit(object sender, EventArgs e)
@@ -83,6 +98,11 @@ namespace Nile.Windows
                 return;
             };
 
+            EditProduct(product);
+        }
+
+        private void EditProduct(Product product)
+        {
             var child = new ProductDetailForm("Product Details");
             child.Product = product;
             if (child.ShowDialog(this) != DialogResult.OK)
@@ -98,7 +118,11 @@ namespace Nile.Windows
             var product = GetSelectedProduct();
             if (product == null)
                 return;
+            DeleteProduct(product);
+        }
 
+        private void DeleteProduct(Product product)
+        {
             //Confirm
             if (MessageBox.Show(this, $"Are you sure you want to delete '{product.Name}'?",
                                 "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -116,10 +140,30 @@ namespace Nile.Windows
         }
 
         private IProductDatabase _database = new Nile.Stores.SeedMemoryProductDatabase();
+        
+        private void OnEditRow(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = sender as DataGridView;
 
-        private void _gridProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+            if (e.RowIndex < 0)
+                return;
+
+            var row = grid.Rows[e.RowIndex];
+            var item = row.DataBoundItem as Product;
+
+            if (item != null)
+                EditProduct(item);
+        }
+
+        private void OnKeyDownGrid(object sender, KeyEventArgs e)
         {
 
+            if (e.KeyCode != Keys.Delete)
+                return;
+
+            var product = GetSelectedProduct();
+            if (product != null)
+                DeleteProduct(product);
         }
         //private Product[] _products = new Product[100];
     }
