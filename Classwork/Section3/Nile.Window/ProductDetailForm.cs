@@ -88,8 +88,7 @@ namespace Nile.Windows
             //var error = product.Validate();
             //if (!String.IsNullOrEmpty(error))
             // Using IValidatableObject
-            if (!ObjectValidator.TryValidate(product, out var errors))
-                    
+            if (!ObjectValidator.TryValidate(product, out var errors)) 
             {
                 //Show the error
                 ShowError("Not Valid", "Validation Error");

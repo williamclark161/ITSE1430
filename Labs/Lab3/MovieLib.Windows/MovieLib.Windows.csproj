@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD5B4068-AAD6-4911-B449-4DBC2587B7B4}</ProjectGuid>
+    <ProjectGuid>{0B1BB492-5E5A-47AC-ACC6-7F20FE3B6D52}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Nile.Windows</RootNamespace>
-    <AssemblyName>Nile.Window</AssemblyName>
+    <RootNamespace>MovieLib.Windows</RootNamespace>
+    <AssemblyName>MovieLib.Windows</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -58,11 +58,11 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductDetailForm.cs">
+    <Compile Include="MovieDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProductDetailForm.Designer.cs">
-      <DependentUpon>ProductDetailForm.cs</DependentUpon>
+    <Compile Include="MovieDetailForm.Designer.cs">
+      <DependentUpon>MovieDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,8 +72,8 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProductDetailForm.resx">
-      <DependentUpon>ProductDetailForm.cs</DependentUpon>
+    <EmbeddedResource Include="MovieDetailForm.resx">
+      <DependentUpon>MovieDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,11 +83,8 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\DataSources\Nile.Product.datasource" />
-    <None Include="Properties\DataSources\Nile.Windows.Properties.Resources.datasource" />
-    <None Include="Properties\DataSources\Nile.Windows.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\MovieLib.Movie.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,9 +99,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nile\Nile.csproj">
-      <Project>{a936180b-3542-4d0a-8cb2-e2ce5ad24d8d}</Project>
-      <Name>Nile</Name>
+    <ProjectReference Include="..\MovieLib\MovieLib.csproj">
+      <Project>{dca48664-6fc8-4569-9114-2d14d67bef94}</Project>
+      <Name>MovieLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
