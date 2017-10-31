@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -80,12 +81,24 @@ namespace Nile.Windows
 
         private void OnProductAdd(object sender, EventArgs e)
         {
+            //_database.Add(null);
+
             var child = new ProductDetailForm("Product Details");
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
             //Save product
-            _database.Add(child.Product);
+            try
+            {
+                _database.Add(child.Product);
+            } catch (ValidationException ex)
+            {
+                MessageBox.Show(this, "Validation failed", "Error");
+            } catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error");
+            };
+            
             UpdateList();
         }
 
@@ -139,7 +152,7 @@ namespace Nile.Windows
             about.ShowDialog(this);
         }
 
-        private IProductDatabase _database = new Nile.Stores.SeedMemoryProductDatabase();
+        private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
         
         private void OnEditRow(object sender, DataGridViewCellEventArgs e)
         {
@@ -164,6 +177,9 @@ namespace Nile.Windows
             var product = GetSelectedProduct();
             if (product != null)
                 DeleteProduct(product);
+
+            // Don't continue with key
+            e.SuppressKeyPress = true;
         }
         //private Product[] _products = new Product[100];
     }
