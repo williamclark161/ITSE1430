@@ -23,57 +23,6 @@ namespace Nile.Windows
             UpdateList();
         }
 
-        //private int FindAvailableElement ( )
-        //{
-        //    for (var index = 0; index < _products.Length; ++index)
-        //    {
-        //        if (_products[index] == null)
-        //            return index;
-        //    };
-
-        //    return -1;
-        //}
-
-        //private int FindFirstProduct()
-        //{
-        //    for (var index = 0; index < _products.Length; ++index)
-        //    {
-        //        if (_products[index] != null)
-        //            return index;
-        //    };
-
-        //    return -1;
-        //}
-
-        private Product GetSelectedProduct()
-        {
-            // return _listProducts.SelectedItem as Product;
-            if (_gridProducts.SelectedRows.Count > 0)
-                return _gridProducts.SelectedRows[0].DataBoundItem as Product;
-
-            return null;
-        }
-
-        private List<Product> _products = new List<Product>();
-        private void UpdateList()
-        {
-            //_listProducts.Items.Clear();
-            //foreach (var product in _database.GetAll())
-            //    _listProducts.Items.Add(product);
-
-            //new BindingList<Product>();
-
-            // var bs = new BindingSource();
-
-            _bsProducts.DataSource = _database.GetAll().ToList();
-            
-            //_products.Clear();
-            //_products.AddRange(_database.GetAll());
-
-            //_gridProducts.DataSource = null;
-            //_gridProducts.DataSource = _products;
-        }
-
         private void OnFileExit(object sender, EventArgs e)
         {
             Close();
@@ -91,15 +40,33 @@ namespace Nile.Windows
             try
             {
                 _database.Add(child.Product);
-            } catch (ValidationException ex)
+            }
+            catch (ValidationException ex)
             {
                 MessageBox.Show(this, "Validation failed", "Error");
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Error");
             };
-            
+
             UpdateList();
+        }
+
+        private void OnProductDelete(object sender, EventArgs e)
+        {
+            var product = GetSelectedProduct();
+            if (product == null)
+                return;
+
+            try
+            {
+                DeleteProduct(product);
+            }
+            catch (Exception e)
+            {
+                MessageBox.
+            };
         }
 
         private void OnProductEdit(object sender, EventArgs e)
@@ -114,46 +81,12 @@ namespace Nile.Windows
             EditProduct(product);
         }
 
-        private void EditProduct(Product product)
-        {
-            var child = new ProductDetailForm("Product Details");
-            child.Product = product;
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
-
-            //Save product
-            _database.Update(child.Product);
-            UpdateList();
-        }
-
-        private void OnProductDelete(object sender, EventArgs e)
-        {
-            var product = GetSelectedProduct();
-            if (product == null)
-                return;
-            DeleteProduct(product);
-        }
-
-        private void DeleteProduct(Product product)
-        {
-            //Confirm
-            if (MessageBox.Show(this, $"Are you sure you want to delete '{product.Name}'?",
-                                "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-
-            //Delete product
-            _database.Remove(product.Id);
-            UpdateList();
-        }
-
         private void OnHelpAbout(object sender, EventArgs e)
         {
             var about = new AboutBox();
             about.ShowDialog(this);
         }
 
-        private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
-        
         private void OnEditRow(object sender, DataGridViewCellEventArgs e)
         {
             var grid = sender as DataGridView;
@@ -181,6 +114,48 @@ namespace Nile.Windows
             // Don't continue with key
             e.SuppressKeyPress = true;
         }
+
+        private void DeleteProduct(Product product)
+        {
+            //Confirm
+            if (MessageBox.Show(this, $"Are you sure you want to delete '{product.Name}'?",
+                                "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+            //Delete product
+            _database.Remove(product.Id);
+            UpdateList();
+        }
+
+        private void EditProduct(Product product)
+        {
+            var child = new ProductDetailForm("Product Details");
+            child.Product = product;
+            if (child.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            //Save product
+            _database.Update(child.Product);
+            UpdateList();
+        }
+
+        private Product GetSelectedProduct()
+        {
+            // return _listProducts.SelectedItem as Product;
+            if (_gridProducts.SelectedRows.Count > 0)
+                return _gridProducts.SelectedRows[0].DataBoundItem as Product;
+
+            return null;
+        }
+
+        private void UpdateList()
+        {
+            _bsProducts.DataSource = _database.GetAll().ToList();
+        }
+
+        private List<Product> _products = new List<Product>();
+        private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+
         //private Product[] _products = new Product[100];
     }
 }

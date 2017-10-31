@@ -38,6 +38,9 @@ namespace MovieLib.Windows
         }
         #endregion
 
+        /// <summary> Gets or sets the movie being shown. </summary>
+        public Movie Movie { get; set; }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -53,8 +56,7 @@ namespace MovieLib.Windows
             ValidateChildren();
         }
 
-        /// <summary> Gets or sets the movie being shown. </summary>
-        public Movie Movie { get; set; }
+       
 
         /// <summary> Will stop what ever function that was called by the main form </summary>
         /// <param name="sender"></param>
@@ -63,11 +65,6 @@ namespace MovieLib.Windows
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private void ShowError(string message, string title)
-        {
-            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         
         /// <summary> Will lock the four features of the movie entered by the user </summary>
@@ -101,13 +98,19 @@ namespace MovieLib.Windows
             Close();
         }
 
-        private int GetLength(TextBox conrtol)
+        /// <summary> Will validate the title of the movie. </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ValidatingTitle(object sender, EventArgs e)
         {
-            if (int.TryParse(_txtLength.Text, out int length))
-                return length;
+            var tb = sender as TextBox;
 
-            //Validate price            
-            return -1;
+            if (String.IsNullOrEmpty(tb.Text))
+            {
+                _errors.SetError(tb, "Title Is Required");
+            }
+            else
+                _errors.SetError(tb, "");
         }
 
         /// <summary> Will validate the movie length.  That it is >= 0. </summary>
@@ -126,19 +129,18 @@ namespace MovieLib.Windows
                 _errors.SetError(_txtLength, "");
         }
 
-        /// <summary> Will validate the title of the movie. </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ValidatingTitle(object sender, EventArgs e)
+        private int GetLength(TextBox conrtol)
         {
-            var tb = sender as TextBox;
+            if (int.TryParse(_txtLength.Text, out int length))
+                return length;
 
-            if (String.IsNullOrEmpty(tb.Text))
-            {
-                _errors.SetError(tb, "Title Is Required");
-            }
-            else
-                _errors.SetError(tb, "");
+            //Validate price            
+            return -1;
+        }
+
+        private void ShowError(string message, string title)
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

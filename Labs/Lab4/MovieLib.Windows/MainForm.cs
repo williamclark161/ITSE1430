@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -69,7 +70,19 @@ namespace MovieLib.Windows
                 return;
 
             //Save product
-            _database.Add(child.Movie);
+            try
+            {
+                _database.Add(child.Movie);
+            }
+            catch (ValidationException ex)
+            {
+                MessageBox.Show(this, "Validation failed", "Error");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error");
+            };
+
             UpdateList();
         }
 
@@ -102,7 +115,14 @@ namespace MovieLib.Windows
             var movie = GetSelectedMovie();
             if (movie == null)
                 return;
-            DeleteMovie(movie);
+
+            try
+            {
+                DeleteMovie(movie);
+            }catch (Exception e)
+            {
+                MessageBox.
+            };
         }
 
         private void DeleteMovie(Movie movie)
@@ -122,8 +142,6 @@ namespace MovieLib.Windows
             var about = new AboutBox();
             about.ShowDialog(this);
         }
-
-        private IMovieDatebase _database = new MovieLib.Library.SeedMemoryMovieDatabase();
 
         private void OnEditRow(object sender, DataGridViewCellEventArgs e)
         {
@@ -147,6 +165,12 @@ namespace MovieLib.Windows
             var movie = GetSelectedMovie();
             if (movie != null)
                 DeleteMovie(movie);
+
+            //Don't continue with key
+            e.SuppressKeyPress = true;
         }
+
+        private IMovieDatebase _database = new MovieLib.Library.SeedMemoryMovieDatabase();
+
     }
 }
