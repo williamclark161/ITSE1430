@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nile.Stores;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,9 @@ namespace Nile.Windows
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            _database = new Nile.Stores.FileProductDatabase("product.csv");
+            ProductDatabaseExtensions.WithSeedData(_database);
 
             _gridProducts.AutoGenerateColumns = false;
 
@@ -61,14 +65,7 @@ namespace Nile.Windows
             if (product == null)
                 return;
 
-            try
-            {
-                DeleteProduct(product);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(this, e.Message, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            };
+            DeleteProduct(product);
         }
 
         private void OnProductEdit(object sender, EventArgs e)
@@ -193,7 +190,7 @@ namespace Nile.Windows
         }
 
         //private List<Product> _products = new List<Product>();
-        private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        private IProductDatabase _database;
         #endregion
     }
 }
