@@ -52,64 +52,32 @@ namespace Nile.Stores
 
             return GetCore(id);
         }
-
-        protected abstract Product GetCore(int id);
         
-
         /// <summary>Gets all products.</summary>
         /// <returns>The products.</returns>
         public IEnumerable<Product> GetAll()
         {
             return GetAllCore();
-            
-            #region Ignore
-            //How many products?
-            //var count = 0;
-            //foreach (var product in _products)
-            //{
-            //    if (product != null)
-            //        ++count;
-            //};
-
-            //var items = new Product[count];
-            //var index = 0;
-
-            //foreach (var product in _products)
-            //{
-            //    if (product != null)
-            //        //product = new Product();
-            //        items[index++] = CopyProduct(product);
-            //};
-
-            //return items;
-#endregion
         }
-
-        protected abstract IEnumerable<Product> GetAllCore();
 
         /// <summary>Removes the product.</summary>
         /// <param name="product">The product to remove.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> must be greater than or equal to 0.</exception> 
         public void Remove(int id)
         {
             //TODO: Validate
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0");
-            //return;
 
             RemoveCore(id);
-
-            //if (_list[index].Name == product.Name)
-            //{
-            //    _list.RemoveAt(index);
-            //    break;
-            //};        
         }
-
-        protected abstract void RemoveCore(int id);
 
         /// <summary>Updates a product.</summary>
         /// <param name="product">The product to update.</param>
         /// <returns>The updated product.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="product"/> is null.</exception>
+        /// <exception cref="ValidationException"><paramref name="product"/> is invalid.</exception>
+        /// <exception cref="Exception">Product not found.</exception>
         public Product Update(Product product)
         {
             //Validate
@@ -129,8 +97,30 @@ namespace Nile.Stores
             return UpdateCore(existing, product);
         }
 
+        #region Protected Members
+
+        /// <summary>Adds a product.</summary>
+        /// <param name="product">The product to add.</param>
+        /// <returns>The added product.</returns>
+        protected abstract Product AddCore(Product product);
+
+        /// <summary>Get a product given its ID.</summary>
+        /// <param name="id">The ID.</param>
+        /// <returns>The product, if any.</returns>
+        protected abstract Product GetCore(int id);
+
+        protected abstract IEnumerable<Product> GetAllCore();
+
+        /// <summary>Removes a product given its ID.</summary>
+        /// <param name="id">The ID.</param>
+        protected abstract void RemoveCore(int id);
+
+        /// <summary>Updates a product.</summary>
+        /// <param name="existing">The existing product.</param>
+        /// <param name="newItem">The product to update.</param>
+        /// <returns>The updated product.</returns>
         protected abstract Product UpdateCore(Product existing, Product newItem);
 
-        protected abstract Product AddCore(Product product);
+        #endregion
     }
 }

@@ -88,7 +88,7 @@ namespace Nile.Stores
         protected override Product UpdateCore(Product existing, Product product)
         {
             //Replace 
-            existing = FindProduct(product.Id);
+            //existing = FindProduct(product.Id);
             _products.Remove(existing);
 
             var newProduct = CopyProduct(product);

@@ -48,6 +48,8 @@ namespace Nile.Windows
             ValidateChildren();
         }
 
+        #region Event Handlers
+
         private void OnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -106,12 +108,15 @@ namespace Nile.Windows
                 _errors.SetError(_txtPrice, "");
         }
 
+        #endregion
+
+        #region Private Members
+
         private decimal GetPrice(TextBox control)
         {
             if (Decimal.TryParse(control.Text, out decimal price))
                 return price;
-
-            //Validate price            
+       
             return -1;
         }
 
@@ -119,6 +124,6 @@ namespace Nile.Windows
         {
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+        #endregion
     }
 }

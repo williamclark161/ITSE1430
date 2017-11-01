@@ -19,7 +19,6 @@ namespace MovieLib
         /// <summary>Gets or sets the unique identifier.</summary>
         public int Id { get; set; }
 
-
         /// <summary> Set the Movie Title. </summary>
         /// <value> Never Return NULL </value>
         public string Title
@@ -62,7 +61,11 @@ namespace MovieLib
                 yield return new ValidationResult("Length must be >= 0.", new[] { nameof(Length) });
         }
 
+        #region Private Members
+
         private string _title;
         private string _description;
+
+        #endregion
     }
 }

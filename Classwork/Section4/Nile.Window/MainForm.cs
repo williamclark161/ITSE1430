@@ -23,6 +23,8 @@ namespace Nile.Windows
             UpdateList();
         }
 
+        #region Event Handlers
+
         private void OnFileExit(object sender, EventArgs e)
         {
             Close();
@@ -65,7 +67,7 @@ namespace Nile.Windows
             }
             catch (Exception e)
             {
-                MessageBox.
+                MessageBox.Show(this, e.Message, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             };
         }
 
@@ -87,10 +89,12 @@ namespace Nile.Windows
             about.ShowDialog(this);
         }
 
+        //Grid
         private void OnEditRow(object sender, DataGridViewCellEventArgs e)
         {
             var grid = sender as DataGridView;
 
+            //Handle column clicks
             if (e.RowIndex < 0)
                 return;
 
@@ -114,6 +118,9 @@ namespace Nile.Windows
             // Don't continue with key
             e.SuppressKeyPress = true;
         }
+        #endregion
+
+        #region Private Members
 
         private void DeleteProduct(Product product)
         {
@@ -123,8 +130,25 @@ namespace Nile.Windows
                 return;
 
             //Delete product
-            _database.Remove(product.Id);
+            try
+            {
+                _database.Remove(product.Id);
+            }
+            catch (Exception e)
+            {
+                DisplayError(e, "Delete Failed");
+            };
             UpdateList();
+        }
+
+        private void DisplayError(Exception error, string title = "Error")
+        {
+            DisplayError(error.Message, title);
+        }
+
+        private void DisplayError(string message, string title = "Error")
+        {
+            MessageBox.Show(this, message, title ?? "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void EditProduct(Product product)
@@ -135,7 +159,14 @@ namespace Nile.Windows
                 return;
 
             //Save product
-            _database.Update(child.Product);
+            try
+            {
+                _database.Update(child.Product);
+            }
+            catch (Exception ex)
+            {
+                DisplayError(ex, "Update Failed");
+            };
             UpdateList();
         }
 
@@ -150,12 +181,19 @@ namespace Nile.Windows
 
         private void UpdateList()
         {
-            _bsProducts.DataSource = _database.GetAll().ToList();
+            try
+            {
+                _bsProducts.DataSource = _database.GetAll().ToList();
+            }
+            catch (Exception e)
+            {
+                DisplayError(e, "Refresh Failed");
+                _bsProducts.DataSource = null;
+            };
         }
 
-        private List<Product> _products = new List<Product>();
+        //private List<Product> _products = new List<Product>();
         private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
-
-        //private Product[] _products = new Product[100];
+        #endregion
     }
 }

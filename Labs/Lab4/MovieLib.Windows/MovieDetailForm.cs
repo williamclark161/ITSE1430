@@ -22,7 +22,7 @@ namespace MovieLib.Windows
     {
         #region Construction
 
-        public MovieDetailForm()
+        public MovieDetailForm() //: base()
         {
             InitializeComponent();
         }
@@ -56,7 +56,7 @@ namespace MovieLib.Windows
             ValidateChildren();
         }
 
-       
+        #region Event Handlers
 
         /// <summary> Will stop what ever function that was called by the main form </summary>
         /// <param name="sender"></param>
@@ -106,9 +106,7 @@ namespace MovieLib.Windows
             var tb = sender as TextBox;
 
             if (String.IsNullOrEmpty(tb.Text))
-            {
                 _errors.SetError(tb, "Title Is Required");
-            }
             else
                 _errors.SetError(tb, "");
         }
@@ -129,6 +127,10 @@ namespace MovieLib.Windows
                 _errors.SetError(_txtLength, "");
         }
 
+        #endregion
+
+        #region Private Members
+
         private int GetLength(TextBox conrtol)
         {
             if (int.TryParse(_txtLength.Text, out int length))
@@ -142,5 +144,6 @@ namespace MovieLib.Windows
         {
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        #endregion
     }
 }

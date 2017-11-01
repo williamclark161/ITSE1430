@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Nile.Stores
 {
-    /// <summary> Base class for product database </summary>
+    /// <summary>Provides a <see cref="MemoryProductDatabase"/> with products already added.</summary>
     public class SeedMemoryProductDatabase : MemoryProductDatabase
     {
 
+        /// <summary>Initializes an instance of the <see cref="SeedMemoryProductDatabase"/> class.</summary>
         public SeedMemoryProductDatabase()
         {
             AddCore(new Product() { Id = 1, Name = "Galaxy S7", Price = 650 });
