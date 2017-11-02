@@ -22,7 +22,7 @@ namespace Nile.Windows
             _database = new Nile.Stores.FileProductDatabase("product.csv");
             ProductDatabaseExtensions.WithSeedData(_database);
 
-            _gridProducts.AutoGenerateColumns = false;
+            //_gridProducts.AutoGenerateColumns = false;
 
             UpdateList();
         }
