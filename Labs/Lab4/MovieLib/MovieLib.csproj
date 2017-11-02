@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMovieDatebase.cs" />
-    <Compile Include="Library\FileMovieDatabase .cs" />
     <Compile Include="Library\MemoryMovieDatabase.cs" />
     <Compile Include="Library\MovieDatabase.cs" />
     <Compile Include="Library\SeedMemoryMovieDatabase.cs" />

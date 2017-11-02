@@ -30,9 +30,6 @@ namespace Nile.Windows
         }
         #endregion
 
-        /// <summary>Gets or sets the product being shown.</summary>
-        public Product Product { get; set; }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -48,12 +45,18 @@ namespace Nile.Windows
             ValidateChildren();
         }
 
-        #region Event Handlers
+        /// <summary>Gets or sets the product being shown.</summary>
+        public Product Product { get; set; }
 
         private void OnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void ShowError(string message, string title)
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void OnSave_Click(object sender, EventArgs e)
@@ -63,7 +66,15 @@ namespace Nile.Windows
                 return;
             };
 
-            //Create a new product
+            //var product = new Product();
+            //product.Id = Product?.Id ?? 0;
+            //product.Name = _txtName.Text;
+            //product.Description = _txtDescription.Text;
+
+            //product.Price = GetPrice(_txtPrice);
+            //product.IsDiscontinued = _chkDiscontinued.Checked;
+
+            // Object initializer syntax
             var product = new Product()
             {
                 Id = Product?.Id ?? 0,
@@ -73,8 +84,11 @@ namespace Nile.Windows
                 IsDiscontinued = _chkDiscontinued.Checked,
             };
 
-            //Validate
-            if (!ObjectValidator.TryValidate(product, out var errors))
+            //Add validation
+            //var error = product.Validate();
+            //if (!String.IsNullOrEmpty(error))
+            // Using IValidatableObject
+            if (!ObjectValidator.TryValidate(product, out var errors)) 
             {
                 //Show the error
                 ShowError("Not Valid", "Validation Error");
@@ -82,17 +96,17 @@ namespace Nile.Windows
             };
 
             Product = product;
-            DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void OnValidatingName(object sender, CancelEventArgs e)
+        private decimal GetPrice(TextBox control)
         {
-            var tb = sender as TextBox;
-            if (String.IsNullOrEmpty(tb.Text))
-                _errors.SetError(tb, "Name is required");
-            else
-                _errors.SetError(tb, "");
+            if (Decimal.TryParse(control.Text, out decimal price))
+                return price;
+
+            //Validate price            
+            return -1;
         }
 
         private void OnValidatingPrice(object sender, CancelEventArgs e)
@@ -108,22 +122,13 @@ namespace Nile.Windows
                 _errors.SetError(_txtPrice, "");
         }
 
-        #endregion
-
-        #region Private Members
-
-        private decimal GetPrice(TextBox control)
+        private void OnValidatingName(object sender, CancelEventArgs e)
         {
-            if (Decimal.TryParse(control.Text, out decimal price))
-                return price;
-       
-            return -1;
+            var tb = sender as TextBox;
+            if (String.IsNullOrEmpty(tb.Text))
+                _errors.SetError(tb, "Name is required");
+            else
+                _errors.SetError(tb, "");
         }
-
-        private void ShowError(string message, string title)
-        {
-            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        #endregion
     }
 }

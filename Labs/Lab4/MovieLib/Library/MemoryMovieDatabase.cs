@@ -22,10 +22,6 @@ namespace MovieLib.Library
             else if (newMovie.Id >= _nextId)
                 _nextId = newMovie.Id + 1;
 
-            //Temporary Crash
-            if (_nextId % 2 == 0)
-                throw new InvalidOperationException("Id invalid");
-
             return CopyMovie(newMovie);
         }
 
@@ -35,7 +31,7 @@ namespace MovieLib.Library
         {
             var movie = FindMovie(id);
 
-            return (movie != null) ? CopyMovie(movie) : throw new Exception("Movie is not in library");
+            return (movie != null) ? CopyMovie(movie) : null;
         }
 
         /// <summary>Gets all products.</summary>
@@ -62,7 +58,7 @@ namespace MovieLib.Library
         protected override Movie UpdateCore(Movie existing, Movie movie)
         {
             //Replace 
-            //existing = FindMovie(movie.Id);
+            existing = FindMovie(movie.Id);
             _movie.Remove(existing);
 
             var newMovie = CopyMovie(movie);

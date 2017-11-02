@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nile.Stores
 {
-    /// <summary>Provides a <see cref="MemoryProductDatabase"/> with products already added.</summary>
+    /// <summary>Provides extensions for <see cref="IProductDatabase"/>.</summary>
     public static class ProductDatabaseExtensions
     {
-
-        /// <summary>Initializes an instance of the <see cref="SeedMemoryProductDatabase"/> class.</summary>
+        /// <summary>Adds seed data to a database.</summary>
+        /// <param name="database">The data to seed.</param>
         public static void WithSeedData(IProductDatabase database)
         {
             database.Add(new Product() { Name = "Galaxy S7", Price = 650 });
@@ -18,5 +14,5 @@ namespace Nile.Stores
             database.Add(new Product() { Name = "Windows Phone", Price = 100 });
             database.Add(new Product() { Name = "iPhone X", Price = 1900, IsDiscontinued = true });
         }
-    }  
+    }
 }

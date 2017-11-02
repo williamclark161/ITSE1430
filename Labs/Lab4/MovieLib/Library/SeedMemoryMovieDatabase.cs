@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieLib.Library
 {
-    /// <summary>Provides a <see cref="MemoryProductDatabase"/> with products already added.</summary>
+    /// <summary> Base class for movie database </summary>
     public class SeedMemoryMovieDatabase : MemoryMovieDatabase
     {
-        /// <summary>Initializes an instance of the <see cref="SeedMemoryProductDatabase"/> class.</summary>
         public SeedMemoryMovieDatabase()
         {
             AddCore(new Movie() { Id = 1, Title = "Pulp Fiction", Length = 154, IsOwned = true });

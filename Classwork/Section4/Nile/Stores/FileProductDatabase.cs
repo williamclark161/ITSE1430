@@ -1,31 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nile.Stores
 {
-    /// <summary> Base class for product database </summary>
+    /// <summary>Provides an implementation of <see cref="IProductDatabase"/> using a memory collection.</summary>
     public class FileProductDatabase : MemoryProductDatabase
     {
-        public FileProductDatabase (string filename)
+        public FileProductDatabase(string filename)
         {
+            //Validate argument
             if (filename == null)
                 throw new ArgumentNullException(nameof(filename));
-
             if (String.IsNullOrEmpty(filename))
-                throw new ArgumentException("Filename cannor be empty.", nameof(filename));
+                throw new ArgumentException("Filename cannot be empty.", nameof(filename));
 
             _filename = filename;
 
             LoadFile(filename);
         }
-        /// <summary>Adds a product.</summary>          
+
+        /// <summary>Adds a product.</summary>
         /// <param name="product">The product to add.</param>
         /// <returns>The added product.</returns>
-        protected override Product AddCore (Product product)
+        protected override Product AddCore(Product product)
         {
             var newProduct = base.AddCore(product);
 
@@ -33,8 +31,6 @@ namespace Nile.Stores
 
             return newProduct;
         }
-
-        
 
         /// <summary>Removes the product.</summary>
         /// <param name="product">The product to remove.</param>
@@ -56,7 +52,7 @@ namespace Nile.Stores
             return newProduct;
         }
 
-        private void LoadFile (string filename)
+        private void LoadFile(string filename)
         {
             if (!File.Exists(filename))
                 return;
@@ -84,32 +80,26 @@ namespace Nile.Stores
         private void SaveFile(string filename)
         {
             //Streaming
-            //StreamWriter writer = null; ;
+            //StreamWriter writer = null;
             //var stream = File.OpenWrite(filename);
-
             //try
             //{
             //    //Write stuff
-            //    writer = new StreamWriter(stream);
-            //}
-            //finally
+            //    writer = new StreamWriter(stream);                
+            //} finally
             //{
             //    writer?.Dispose();
-            //    stream.Close(); //Cleans up Stream
-            //};
-
-            //Stort cut for using and disposing objects and deals with null
+            //    stream.Close();
+            //};            
             using (var writer = new StreamWriter(filename))
             {
                 //Write stuff
                 foreach (var product in GetAllCore())
                 {
-                    {
-                        var row = String.Join(",", product.Id, product.Name,
-                                    product.Description, product.Price, product.IsDiscontinued);
+                    var row = String.Join(",", product.Id, product.Name,
+                                          product.Description, product.Price, product.IsDiscontinued);
 
-                        writer.WriteLine(row);
-                    };
+                    writer.WriteLine(row);
                 };
             };
         }

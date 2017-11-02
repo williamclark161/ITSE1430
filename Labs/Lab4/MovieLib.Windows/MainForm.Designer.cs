@@ -40,12 +40,12 @@
             this.OnHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.OnHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this._gridMovies = new System.Windows.Forms.DataGridView();
-            this._bsMovies = new System.Windows.Forms.BindingSource(this.components);
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isOwnedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._bsMovies = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._gridMovies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._bsMovies)).BeginInit();
@@ -59,7 +59,7 @@
             this.OnHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(675, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(690, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -147,14 +147,10 @@
             this._gridMovies.ReadOnly = true;
             this._gridMovies.RowHeadersVisible = false;
             this._gridMovies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._gridMovies.Size = new System.Drawing.Size(675, 372);
+            this._gridMovies.Size = new System.Drawing.Size(690, 339);
             this._gridMovies.TabIndex = 1;
             this._gridMovies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnEditRow);
             this._gridMovies.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownGrid);
-            // 
-            // _bsMovies
-            // 
-            this._bsMovies.DataSource = typeof(MovieLib.Movie);
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -199,11 +195,15 @@
             this.isOwnedDataGridViewCheckBoxColumn.Name = "isOwnedDataGridViewCheckBoxColumn";
             this.isOwnedDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
+            // _bsMovies
+            // 
+            this._bsMovies.DataSource = typeof(MovieLib.Movie);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 396);
+            this.ClientSize = new System.Drawing.Size(690, 363);
             this.Controls.Add(this._gridMovies);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

@@ -1,34 +1,36 @@
-﻿using Nile.Stores;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Forms;
+using Nile.Stores;
 
 namespace Nile.Windows
 {
     public partial class MainForm : Form
     {
+        #region Construction
+
         public MainForm()
         {
             InitializeComponent();
         }
+        #endregion
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            _database = new Nile.Stores.FileProductDatabase("product.csv");
+            _database = new Nile.Stores.FileProductDatabase("products.csv");
             ProductDatabaseExtensions.WithSeedData(_database);
 
-            //_gridProducts.AutoGenerateColumns = false;
+            _gridProducts.AutoGenerateColumns = false;
 
             UpdateList();
         }
 
         #region Event Handlers
 
+        //Menus
         private void OnFileExit(object sender, EventArgs e)
         {
             Close();
@@ -49,13 +51,12 @@ namespace Nile.Windows
             }
             catch (ValidationException ex)
             {
-                MessageBox.Show(this, "Validation failed", "Error");
+                DisplayError(ex, "Validation Failed");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error");
+                DisplayError(ex, "Add Failed");
             };
-
             UpdateList();
         }
 
@@ -104,7 +105,6 @@ namespace Nile.Windows
 
         private void OnKeyDownGrid(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode != Keys.Delete)
                 return;
 
@@ -112,7 +112,7 @@ namespace Nile.Windows
             if (product != null)
                 DeleteProduct(product);
 
-            // Don't continue with key
+            //Don't continue with key
             e.SuppressKeyPress = true;
         }
         #endregion
@@ -164,12 +164,12 @@ namespace Nile.Windows
             {
                 DisplayError(ex, "Update Failed");
             };
+
             UpdateList();
         }
 
         private Product GetSelectedProduct()
         {
-            // return _listProducts.SelectedItem as Product;
             if (_gridProducts.SelectedRows.Count > 0)
                 return _gridProducts.SelectedRows[0].DataBoundItem as Product;
 
@@ -189,7 +189,6 @@ namespace Nile.Windows
             };
         }
 
-        //private List<Product> _products = new List<Product>();
         private IProductDatabase _database;
         #endregion
     }

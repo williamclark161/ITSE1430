@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nile.Stores
 {
-    /// <summary> Base class for product database </summary>
+    /// <summary>Provides a base implementation of <see cref="IProductDatabase"/>.</summary>
     public abstract class ProductDatabase : IProductDatabase
     {
-        /// <summary>Adds a product.</summary>          
+        /// <summary>Adds a product.</summary>
         /// <param name="product">The product to add.</param>
         /// <returns>The added product.</returns>
-        /// <exception cref="ArgumentNullException">Product is null</exception>
-        /// <exception cref="ValidationException">Product is invalid</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="product"/> is null.</exception>
+        /// <exception cref="ValidationException"><paramref name="product"/> is invalid.</exception>
         public Product Add(Product product)
         {
             //Validate
             if (product == null)
                 throw new ArgumentNullException(nameof(product), "Product was null");
-            
+
             //System.ComponentModel.DataAnnotations.Validator.
             //if (!ObjectValidator.TryValidate(product, out var errors))
             //    throw new System.ComponentModel.DataAnnotations.ValidationException("Product was not valid", nameof(product));
@@ -29,30 +26,32 @@ namespace Nile.Stores
             try
             {
                 return AddCore(product);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 //Throw different exception
                 throw new Exception("Add failed", e);
 
-                //Re-throws the previous error
-                throw;  
+                //Re-throw
+                throw;
+                //throw e;
 
-                //Silently ignore  - almost always bad
+                //Silently ignore - almost always bad
             };
         }
 
         /// <summary>Get a specific product.</summary>
         /// <returns>The product, if it exists.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> must be greater than or equal to 0.</exception> 
         public Product Get(int id)
         {
             //Validate
             if (id <= 0)
-                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0");
-                //return null;
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
             return GetCore(id);
         }
-        
+
         /// <summary>Gets all products.</summary>
         /// <returns>The products.</returns>
         public IEnumerable<Product> GetAll()
@@ -61,13 +60,13 @@ namespace Nile.Stores
         }
 
         /// <summary>Removes the product.</summary>
-        /// <param name="product">The product to remove.</param>
+        /// <param name="id">The product to remove.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> must be greater than or equal to 0.</exception> 
         public void Remove(int id)
         {
-            //TODO: Validate
+            // Validate
             if (id <= 0)
-                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0");
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
             RemoveCore(id);
         }
@@ -80,19 +79,19 @@ namespace Nile.Stores
         /// <exception cref="Exception">Product not found.</exception>
         public Product Update(Product product)
         {
-            //Validate
+            // Validate
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
 
             //if (!ObjectValidator.TryValidate(product, out var errors))
-            //    throw new ArgumentException("Product is invalid", nameof(product));
+            //  throw new ArgumentException("Product is invalid.", nameof(product));
             ObjectValidator.Validate(product);
 
-            //Use throw exception
+            //Use throw expression
             //Get existing product
-            var existing = GetCore(product.Id) ?? throw new Exception("Product not found");
+            var existing = GetCore(product.Id) ?? throw new Exception("Product not found.");
             //if (existing == null)
-            //    throw new Exception("Product not found");
+            //    throw new Exception("Product not found.");
 
             return UpdateCore(existing, product);
         }

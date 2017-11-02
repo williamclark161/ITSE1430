@@ -43,23 +43,57 @@ namespace Nile
             return Name;
         }
 
+        //Size of the product
+        //public int[] Sizes
+        //{
+        //    get
+        //    {
+        //        var copySizes = new int[_sizes.Length];
+        //        Array.Copy(_sizes, copySizes, _sizes.Length);
+
+        //        return copySizes;
+        //    }
+        //}
+
+        //private int[] _sizes = new int[4];
+
+        /// <summary>Validates the object.</summary>
+        /// <returns>The error message or null.</returns>
+        //public virtual string Validate()
+        //{
+        //    //Name cannot be empty
+        //    if (String.IsNullOrEmpty(Name))
+        //        return "Name cannot be empty.";
+
+        //    //Price >= 0
+        //    if (Price < 0)
+        //        return "Price must be >= 0.";
+
+        //    return null;
+        //}
+        //IEnumerable<ValidationResult> IValidatableObject.Validate (ValidationContext validationContext)
+        //{
+
+        //}
         public IEnumerable<ValidationResult> Validate (ValidationContext validationContext)
         {
+            //var errors = new List<ValidationResult>();
+
             //Name cannot be empty
             if (String.IsNullOrEmpty(Name))
                 yield return new ValidationResult("Name cannot be empty.", new[] { nameof(Name) });
+            //errors.Add(new ValidationResult("Name cannot be empty.", new[] { nameof(Name) }));
 
             //Price >= 0
             if (Price < 0)
                 yield return new ValidationResult("Price must be >= 0.", new[] { nameof(Price) });
-        }
+            //error.Add(new ValidationResult("Price must be >= 0.", new[] { nameof(Price) }));
 
-        #region Private Members
+            //return errors;
+        }
 
         private string _name;
         private string _description;
-
-        #endregion
     }
 
 }
