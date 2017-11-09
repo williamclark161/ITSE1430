@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nile
 {
     /// <summary>Provides extensions for <see cref="IProductDatabase"/>.</summary>
     public static class ProductDatabaseExtensions
     {
+        /// <summary> Get a product by name. /// </summary>
+        /// <param name="source"></param>
+        /// <param name="name"></param>
+        /// <returns>The product, if found.</returns>
         public static Product GetByName (this IProductDatabase source, string name)
         {
             foreach (var item in source.GetAll())
@@ -15,6 +21,40 @@ namespace Nile
 
             return null;
         }
+
+        public static IEnumerable<Product> GetProductsByDiscountPrice (this IProductDatabase source, 
+                                                                       Func<Product, decimal> priceCalculator)
+        {
+            var products = from product in source.GetAll()
+                           where product.IsDiscontinued
+                           //select new SomeType () {
+                           select new //Anonymous Type
+                           {
+                               Product = product,
+                               AdjustedPrice = product.IsDiscontinued ? priceCalculator(product) : product.Price
+                           };
+
+            //Instead oa anonymous tyoe
+            //var tuple = Tuple.Create<Product, decimal>(new Product(), 10M);
+
+            return from product in products
+                   orderby product.AdjustedPrice
+                   select product.Product;
+
+        }
+
+        //Tuple Function
+        //private (Product : Product, AdjustedPrice : decimal) DoSomething()
+        //{
+        //    return (new Product, 10M);
+        //}
+
+
+        //private sealed class SomeType
+        //{
+        //    public Product Product { get; set; }
+        //    public decimal AdjustedPrice { get; set; }
+        //}
         
         /// <summary>Adds seed data to a database.</summary>
         /// <param name="source">The data to seed.</param>

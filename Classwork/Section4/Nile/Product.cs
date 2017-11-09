@@ -20,59 +20,32 @@ namespace Nile
         /// <value>Never returns null.</value>
         public string Name
         {
-            get { return _name ?? ""; }
-            set { _name = value?.Trim(); }
+            get => _name ?? "";  //Lambda Expression
+            set => _name = value?.Trim();
         }
 
         /// <summary>Gets or sets the description.</summary>
         public string Description
         {
-            get { return _description ?? ""; }
-            set { _description = value?.Trim(); }
+            get => _description ?? ""; 
+            set => _description = value?.Trim(); 
         }
 
+        public decimal CalculatedProperty => 0M; //Converted to Getter Value.  Read Only Property.  DO NOT FORGET THE '=>'
+        
         /// <summary>Gets or sets the price.</summary>
         public decimal Price { get; set; } = 0;
 
         /// <summary>Determines if discontinued.</summary>
         public bool IsDiscontinued { get; set; }
 
-        
-        public override string ToString()
-        {
-            return Name;
-        }
 
-        //Size of the product
-        //public int[] Sizes
+        //public override string ToString()
         //{
-        //    get
-        //    {
-        //        var copySizes = new int[_sizes.Length];
-        //        Array.Copy(_sizes, copySizes, _sizes.Length);
-
-        //        return copySizes;
-        //    }
+        //    return Name;
         //}
 
-        //private int[] _sizes = new int[4];
-
-        /// <summary>Validates the object.</summary>
-        /// <returns>The error message or null.</returns>
-        //public virtual string Validate()
-        //{
-        //    //Name cannot be empty
-        //    if (String.IsNullOrEmpty(Name))
-        //        return "Name cannot be empty.";
-
-        //    //Price >= 0
-        //    if (Price < 0)
-        //        return "Price must be >= 0.";
-
-        //    return null;
-        //}
-        //IEnumerable<ValidationResult> IValidatableObject.Validate (ValidationContext validationContext)
-        //{
+        public override string ToString() => Name;
 
         //}
         public IEnumerable<ValidationResult> Validate (ValidationContext validationContext)
