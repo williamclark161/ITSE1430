@@ -3,41 +3,54 @@
  * Programmer: William Clark - Crestworld
  */
 
- using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.Library
+namespace MovieLib.MovieDatabase
 {
-    /// <summary> Base class for movie database </summary>
+    /// <summary>Provides a base implementation of <see cref="IMovieDatabase"/>.</summary>
     public abstract class MovieDatabase : IMovieDatebase
     {
         /// <summary>Adds a movie.</summary>          
-        /// <param name="movie">The product to add.</param>
-        /// <returns>The added product.</returns>
+        /// <param name="movie">The movie to add.</param>
+        /// <returns>The added movie.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="movie"/> is null.</exception>
+        /// <exception cref="ValidationException"><paramref name="movie"/> is invalid.</exception>
         public Movie Add(Movie movie)
         {
             // Validate
             if (movie == null)
-                return null;
+                throw new ArgumentNullException(nameof(movie), "Movie was null");
 
             // Using IValidatableObject
-            if (!ObjectValidator.TryValidate(movie, out var errors))
-                return null;
-            
-            //Emulate database by storing copy
-            return AddCore(movie);
+            ObjectValidator.Validate(movie);
+
+
+            try
+            {
+                return AddCore(movie);
+            }
+            catch (Execption e)
+            {
+                //Throw different exception
+                throw new Exception("Add failed", e);
+
+                //Re-throw
+                throw;
+            }
         }
 
         /// <summary>Get a specific movie.</summary>
         /// <returns>The movie, if it exists.</returns>
+        /// /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> must be greater than or equal to 0.</exception> 
         public Movie Get(int id)
         {
             // Validate
             if (id <= 0)
-                return null;
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
             return GetCore(id);
         }
@@ -59,7 +72,7 @@ namespace MovieLib.Library
         {
             // Validate
             if (id <= 0)
-                return;
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
             RemoveCore(id);
         }
@@ -73,22 +86,23 @@ namespace MovieLib.Library
         {
             // Validate
             if (movie == null)
-                return null;
+                throw new ArgumentNullException(nameof(movie));
 
             // Using IValidatableObject
-            if (!ObjectValidator.TryValidate(movie, out var errors))
-                return null;
+            ObjectValidator.Validate(movie);
             
             //Get existing movie
-            var existing = GetCore(movie.Id);
+            var existing = GetCore(movie.Id) ?? throw new Exception("Movie not found.");
             if (existing == null)
                 return null;
 
             return UpdateCore(existing, movie);
         }
 
+        #region Protected Members
         protected abstract Movie UpdateCore(Movie existing, Movie newItem);
 
         protected abstract Movie AddCore(Movie movie);
+        #endregion
     }
 }

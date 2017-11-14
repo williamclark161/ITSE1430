@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.Library
+namespace MovieLib.MovieDatabase
 {
     /// <summary> Base class for product database </summary>
     public class MemoryMovieDatabase : MovieDatabase
@@ -15,7 +15,7 @@ namespace MovieLib.Library
         protected override Movie AddCore(Movie movie)
         {
             var newMovie = CopyMovie(movie);
-            _movie.Add(newMovie);
+            _movies.Add(newMovie);
 
             if (newMovie.Id <= 0)
                 newMovie.Id = _nextId++;
@@ -31,7 +31,7 @@ namespace MovieLib.Library
         {
             var movie = FindMovie(id);
 
-            return (movie != null) ? CopyMovie(movie) : null;
+            return (movie != null) ? CopyMovie(movie) : throw new Exception("Movie not in memory.");
         }
 
         /// <summary>Gets all products.</summary>
@@ -39,7 +39,7 @@ namespace MovieLib.Library
         protected override IEnumerable<Movie> GetAllCore()
         {
 
-            foreach (var movie in _movie)
+            foreach (var movie in _movies)
                 yield return CopyMovie(movie);
         }
 
@@ -49,7 +49,7 @@ namespace MovieLib.Library
         {
             var movie = FindMovie(id);
             if (movie != null)
-                _movie.Remove(movie);
+                _movies.Remove(movie);
         }
 
         /// <summary>Updates a movie.</summary>
@@ -59,10 +59,10 @@ namespace MovieLib.Library
         {
             //Replace 
             existing = FindMovie(movie.Id);
-            _movie.Remove(existing);
+            _movies.Remove(existing);
 
             var newMovie = CopyMovie(movie);
-            _movie.Add(newMovie);
+            _movies.Add(newMovie);
 
             return CopyMovie(newMovie);
         }
@@ -82,19 +82,23 @@ namespace MovieLib.Library
             return newMovie;
         }
 
-        //Find a product by ID
+        //Find a movie by ID
         private Movie FindMovie(int id)
         {
-            foreach (var movie in _movie)
-            {
-                if (movie.Id == id)
-                    return movie;
-            };
+            return (from movie in _movies
+                    where movie.Id == id
+                    select movie).FirstOrDefault();
 
-            return null;
+            //foreach (var movie in _movies)
+            //{
+            //    if (movie.Id == id)
+            //        return movie;
+            //};
+
+            //return null;
         }
 
-        private List<Movie> _movie = new List<Movie>();
+        private List<Movie> _movies = new List<Movie>();
         private int _nextId = 1;
     }
 }

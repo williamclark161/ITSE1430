@@ -23,5 +23,13 @@ namespace MovieLib
             errors = results;
             return Validator.TryValidateObject(value, context, results);
         }
+
+        /// <summary>Validates an object.</summary>
+        /// <param name="value">The object to validate.</param>
+        /// <exception cref="ValidationException"><paramref name="value"/> is invalid.</exception>
+        public static void Validate(IValidatableObject value)
+        {
+            Validator.ValidateObject(value, new ValidationContext(value));
+        }
     }
 }

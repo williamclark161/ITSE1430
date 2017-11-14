@@ -123,7 +123,7 @@ namespace MovieLib.Windows
             about.ShowDialog(this);
         }
 
-        private IMovieDatebase _database = new MovieLib.Library.SeedMemoryMovieDatabase();
+        private IMovieDatebase _database = new MovieLib.MovieDatabase.SeedMemoryMovieDatabase();
 
         private void OnEditRow(object sender, DataGridViewCellEventArgs e)
         {
