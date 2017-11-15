@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.MovieDatabase
+namespace MovieLib.MovieDatabases
 {
-    /// <summary> Base class for product database </summary>
+    /// <summary>Provides an implementation of <see cref="IMovieDatabase"/> using a memory collection.</summary>
     public class MemoryMovieDatabase : MovieDatabase
     {
         /// <summary>Adds a movie.</summary>          
@@ -39,8 +39,11 @@ namespace MovieLib.MovieDatabase
         protected override IEnumerable<Movie> GetAllCore()
         {
 
-            foreach (var movie in _movies)
-                yield return CopyMovie(movie);
+            return from item in _movies
+                   select CopyMovie(item);
+
+            //foreach (var movie in _movies)
+            //    yield return CopyMovie(movie);
         }
 
         /// <summary>Removes the movie.</summary>

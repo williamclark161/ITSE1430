@@ -24,8 +24,8 @@ namespace MovieLib
         /// <value> Never Return NULL </value>
         public string Title
         {
-            get { return _title ?? ""; }
-            set { _title = value?.Trim(); }
+            get => _title ?? "";
+            set => _title = value?.Trim();
 
         }
 
@@ -33,8 +33,8 @@ namespace MovieLib
         /// <value> Never Return NULL </value>
         public string Description
         {
-            get { return _description ?? ""; }
-            set { _description = value?.Trim(); }
+            get => _description ?? "";
+            set => _description = value?.Trim();
         }
 
         /// <summary> Gets or sets the length of the movie. </summary>
@@ -43,10 +43,10 @@ namespace MovieLib
         /// <summary> Determines if Movie is Owned. </summary>
         public bool IsOwned { get; set; }
 
-        public override string ToString()
-        {
-            return Title;
-        }
+        //public override string ToString()
+        //{
+        //    return Title;
+        //}
 
 
         /// <summary>Validates the object.</summary>

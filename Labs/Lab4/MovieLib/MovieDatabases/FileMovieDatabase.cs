@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MovieLib.MovieDatabase;
 
 namespace MovieLib.MovieDatabases
 {
     public class FileMovieDatabase : MemoryMovieDatabase
     {
-        public FileProductDatabase(string filename)
+        public FileMovieDatabase(string filename)
         {
             //Validate argument
             if (filename == null)

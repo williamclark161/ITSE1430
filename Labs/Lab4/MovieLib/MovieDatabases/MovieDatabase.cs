@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.MovieDatabase
+namespace MovieLib.MovieDatabases
 {
     /// <summary>Provides a base implementation of <see cref="IMovieDatabase"/>.</summary>
-    public abstract class MovieDatabase : IMovieDatebase
+    public abstract class MovieDatabase : IMovieDatabase
     {
         /// <summary>Adds a movie.</summary>          
         /// <param name="movie">The movie to add.</param>
@@ -33,7 +33,7 @@ namespace MovieLib.MovieDatabase
             {
                 return AddCore(movie);
             }
-            catch (Execption e)
+            catch (Exception e)
             {
                 //Throw different exception
                 throw new Exception("Add failed", e);
@@ -55,16 +55,12 @@ namespace MovieLib.MovieDatabase
             return GetCore(id);
         }
 
-        protected abstract Movie GetCore(int id);
-
         /// <summary>Gets all movies.</summary>
         /// <returns>The movies.</returns>
         public IEnumerable<Movie> GetAll()
         {
             return GetAllCore();
         }
-
-        protected abstract IEnumerable<Movie> GetAllCore();
 
         /// <summary>Removes the movie.</summary>
         /// <param name="movie">The movie to remove.</param>
@@ -76,8 +72,6 @@ namespace MovieLib.MovieDatabase
 
             RemoveCore(id);
         }
-
-        protected abstract void RemoveCore(int id);
 
         /// <summary>Updates a movie.</summary>
         /// <param name="movie">The movie to update.</param>
@@ -93,16 +87,37 @@ namespace MovieLib.MovieDatabase
             
             //Get existing movie
             var existing = GetCore(movie.Id) ?? throw new Exception("Movie not found.");
-            if (existing == null)
-                return null;
+            //if (existing == null)
+            //    return null;
 
             return UpdateCore(existing, movie);
         }
 
         #region Protected Members
+
+        /// <summary>Adds a movie.</summary>
+        /// <param name="movie">The movie to add.</param>
+        /// <returns>The added movie.</returns>
+        protected abstract Movie AddCore(Movie movie);
+
+        /// <summary>Get a movie given its ID.</summary>
+        /// <param name="id">The ID.</param>
+        /// <returns>The movie, if any.</returns>
+        protected abstract Movie GetCore(int id);
+
+        protected abstract IEnumerable<Movie> GetAllCore();
+
+        /// <summary>Removes a movie given its ID.</summary>
+        /// <param name="id">The ID.</param>
+        protected abstract void RemoveCore(int id);
+
+        /// <summary>Updates a movie.</summary>
+        /// <param name="existing">The existing movie.</param>
+        /// <param name="newItem">The movie to update.</param>
+        /// <returns>The updated movie.</returns>
         protected abstract Movie UpdateCore(Movie existing, Movie newItem);
 
-        protected abstract Movie AddCore(Movie movie);
+        
         #endregion
     }
 }

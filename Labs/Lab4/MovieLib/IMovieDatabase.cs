@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MovieLib
 {
     /// <summary>Provides a database of <see cref="Movie"/> items.</summary>
-    public interface IMovieDatebase
+    public interface IMovieDatabase
     {
         /// <summary>Adds a movie.</summary>
         /// <param name="movie">The movie to add.</param>

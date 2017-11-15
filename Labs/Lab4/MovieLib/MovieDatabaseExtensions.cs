@@ -1,5 +1,4 @@
-﻿using MovieLib.MovieDatabase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,7 +45,7 @@ namespace MovieLib
 
         //}
 
-        public static void withSeedData(this IMovieDatebase sourse)
+        public static void withSeedData(this IMovieDatabase sourse)
         {
             sourse.Add(new Movie() { Title = "Pulp Fiction", Length = 154, IsOwned = true });
             sourse.Add(new Movie() { Title = "Wonder Woman", Length = 141, });
