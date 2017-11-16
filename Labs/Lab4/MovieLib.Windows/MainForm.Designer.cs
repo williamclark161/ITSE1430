@@ -76,7 +76,7 @@
             this.OnFileExit.Name = "OnFileExit";
             this.OnFileExit.Size = new System.Drawing.Size(100, 23);
             this.OnFileExit.Text = "Exit";
-            this.OnFileExit.Click += new System.EventHandler(this.OnFileExit_Click);
+            //this.OnFileExit.Click += new System.EventHandler(this.OnFileExit_Click);
             // 
             // moviesToolStripMenuItem
             // 

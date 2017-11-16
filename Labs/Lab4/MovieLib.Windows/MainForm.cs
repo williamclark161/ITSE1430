@@ -30,10 +30,14 @@ namespace MovieLib.Windows
         {
             base.OnLoad(e);
 
-            _miFileExit.Click += (o, ea) => Close();
+            //_miFileExit.Click += (o, ea) => Close();
 
-            var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"].ConnectionString;
-            _database = new Nile.Stores.Sql.SqlProductDatabase(connString);
+            //var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"].ConnectionString;
+            //_database = new Nile.Stores.Sql.SqlProductDatabase(connString);
+
+            //Use the extension Luke
+            //MovieDatabaseExtensions.WithSeedData(_database);
+            //_database.WithSeedData();
 
             _gridMovies.AutoGenerateColumns = false;
 
