@@ -15,6 +15,13 @@ namespace MovieLib.MovieDatabases
         protected override Movie AddCore(Movie movie)
         {
             var newMovie = CopyMovie(movie);
+
+            foreach (var item in _movies)
+            {
+                if (item == newMovie)
+                    throw new ArgumentException(nameof(newMovie), " is already in Movie Library Database");
+            }
+
             _movies.Add(newMovie);
 
             if (newMovie.Id <= 0)

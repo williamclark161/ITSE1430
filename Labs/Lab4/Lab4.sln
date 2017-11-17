@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLib.Windows", "MovieLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLib", "MovieLib\MovieLib.csproj", "{DCA48664-6FC8-4569-9114-2D14D67BEF94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLib.MovieDatabases.Sql", "MovieLib.MovieDatabases.Sql\MovieLib.MovieDatabases.Sql.csproj", "{CB435AA7-D47F-4370-B7F3-E3E73C39D441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLib.Data.Sql", "MovieLib.MovieDatabases.Sql\MovieLib.Data.Sql.csproj", "{CB435AA7-D47F-4370-B7F3-E3E73C39D441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

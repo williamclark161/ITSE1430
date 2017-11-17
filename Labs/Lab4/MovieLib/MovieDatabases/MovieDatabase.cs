@@ -25,6 +25,8 @@ namespace MovieLib.MovieDatabases
             if (movie == null)
                 throw new ArgumentNullException(nameof(movie), "Movie was null");
 
+            foreach (movie in _movies)
+
             // Using IValidatableObject
             ObjectValidator.Validate(movie);
 
