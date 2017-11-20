@@ -11,13 +11,13 @@ Post-Deployment Script Template
 */
 DECLARE @count INT
 
-SELECT @count = COUNT(*) FROM Products
+SELECT @count = COUNT(*) FROM Movies
 
 IF @count = 0
 BEGIN
-    INSERT INTO Products (Name, Description, Price, IsDiscontinued) VALUES
-        ('Windows Phone', 'Windows 10 Phone', 100, 0),
-        ('Galaxy S7', 'Good phone', 650, 0),
-        ('Galaxy Note 7', 'FAA ban edition', 150, 1),
-        ('iPhone X', 'Outdated', 1900, 1)
+    INSERT INTO Movies (Title, Description, Length, IsOwned) VALUES
+        ('Pulp Fiction', 'My #1 Of All Time', 154, 1),
+        ('Wonder Woman', 'Best DCEU Film So Far', 141, 0),
+        ('The Lion King', 'Very Heart Felt Film', 88, 1),
+        ('iFull Metal Jacket', 'IMO, Kubrick Masterpiece', 116, 1)
 END

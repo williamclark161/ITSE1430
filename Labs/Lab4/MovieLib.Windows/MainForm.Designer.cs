@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.OnFileExit = new System.Windows.Forms.ToolStripTextBox();
+            this._miFileExit = new System.Windows.Forms.ToolStripTextBox();
             this.moviesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OnMovieAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.OnMovieEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,17 +66,16 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OnFileExit});
+            this._miFileExit});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
             this.toolStripMenuItem1.Text = "File";
             // 
-            // OnFileExit
+            // _miFileExit
             // 
-            this.OnFileExit.Name = "OnFileExit";
-            this.OnFileExit.Size = new System.Drawing.Size(100, 23);
-            this.OnFileExit.Text = "Exit";
-            //this.OnFileExit.Click += new System.EventHandler(this.OnFileExit_Click);
+            this._miFileExit.Name = "_miFileExit";
+            this._miFileExit.Size = new System.Drawing.Size(100, 23);
+            this._miFileExit.Text = "Exit";
             // 
             // moviesToolStripMenuItem
             // 
@@ -222,7 +221,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripTextBox OnFileExit;
+        private System.Windows.Forms.ToolStripTextBox _miFileExit;
         private System.Windows.Forms.ToolStripMenuItem moviesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OnMovieAdd;
         private System.Windows.Forms.ToolStripMenuItem OnMovieEdit;

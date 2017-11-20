@@ -1,12 +1,13 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 3 - Movie Library Window Database Version
- * Programmer: William Clark - Crestworld
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
  */
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -21,40 +22,26 @@ namespace MovieLib.Windows
     /// It also has an about page and exits the program. </summary>
     public partial class MainForm : Form
     {
+        #region Construction
         public MainForm()
         {
             InitializeComponent();
         }
+        #endregion
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            //_miFileExit.Click += (o, ea) => Close();
+            _miFileExit.Click += (o, ea) => Close();
 
-            //var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"].ConnectionString;
-            //_database = new Nile.Stores.Sql.SqlProductDatabase(connString);
-
-            //Use the extension Luke
-            //MovieDatabaseExtensions.WithSeedData(_database);
-            //_database.WithSeedData();
+            var connString = ConfigurationManager.ConnectionStrings["MovieDatabase"].ConnectionString;
+            _database = new MovieLib.Data.Sql.SqlMovieDatabase(connString);
 
             _gridMovies.AutoGenerateColumns = false;
 
             UpdateList();
         }
-
-        //public delegate void ButtonClickCall(object sender, EventArgs e);
-
-        //private void CallButton(ButtonClickCall functionToCall)
-        //{
-        //    functionToCall(this, EventArgs.Empty);
-        //}
-        
-        //private void OnFileExit_Click(object sender, EventArgs e)
-        //{
-        //    Close();
-        //}
 
         #region Event Handlers
         private void OnMovieAdd_Click(object sender, EventArgs e)
@@ -84,6 +71,7 @@ namespace MovieLib.Windows
             var movie = GetSelectedMovie();
             if (movie == null)
                 return;
+
             DeleteMovie(movie);
         }
 
@@ -145,7 +133,15 @@ namespace MovieLib.Windows
                 return;
 
             //Delete product
-            _database.Remove(movie.Id);
+            try
+            {
+                _database.Remove(movie.Id);
+            }
+            catch (Exception e)
+            {
+                DisplayError(e, "Delete Failed");
+            };
+
             UpdateList();
         }
 
@@ -200,8 +196,6 @@ namespace MovieLib.Windows
         }
 
         private IMovieDatabase _database;
-        //private Movie _movie;
-        private List<Movie> _movies = new List<Movie>();
         #endregion
     }
 }

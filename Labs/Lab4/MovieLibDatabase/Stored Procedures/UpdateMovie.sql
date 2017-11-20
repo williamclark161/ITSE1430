@@ -1,23 +1,23 @@
-﻿CREATE PROCEDURE [dbo].[UpdateProduct]
+﻿CREATE PROCEDURE [dbo].[UpdateMovie]
     @id INT,
-	@name NVARCHAR(100),
-    @price MONEY,    
+	@title NVARCHAR(100),
+    @length INT,    
     @description NVARCHAR(MAX) = NULL,
-	@isDiscontinued BIT = 0
+	@isOwned BIT = 0
 AS BEGIN
     SET NOCOUNT ON;
 
-    IF NOT EXISTS (SELECT * FROM Products WHERE Id = @id)
+    IF NOT EXISTS (SELECT * FROM Movies WHERE Id = @id)
 	BEGIN
-		RAISERROR('Product not found', 16, 1)
+		RAISERROR('Movie not found', 16, 1)
 		RETURN
 	END
 
-	UPDATE Products
+	UPDATE Movies
 	SET 
-		Name = @name,
+		Title = @title,
 		Description = @description, 
-		Price = @price,
-		IsDiscontinued = @isDiscontinued
+		Length = @length,
+		IsOwned = @isOwned
 	WHERE Id = @id
 END

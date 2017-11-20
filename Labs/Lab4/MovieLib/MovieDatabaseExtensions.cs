@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +16,7 @@ namespace MovieLib
     {
         /// <summary> Get a product by name. /// </summary>
         /// <param name="source"></param>
-        /// <param name="name"></param>
+        /// <param name="title"></param>
         /// <returns>The product, if found.</returns>
         public static Movie GetByTitle(this IMovieDatabase source, string title)
         {
@@ -24,33 +29,14 @@ namespace MovieLib
             return null;
         }
 
-        //public static IEnumerable<Movie> GetProductsByDiscountPrice(this IMovieDatabase source,
-        //                                                               Func<Movie, decimal> priceCalculator)
-        //{
-        //    var products = from product in source.GetAll()
-        //                   where product.IsDiscontinued
-        //                   //select new SomeType () {
-        //                   select new //Anonymous Type
-        //                   {
-        //                       Product = product,
-        //                       AdjustedPrice = product.IsDiscontinued ? priceCalculator(product) : product.Price
-        //                   };
-
-        //    //Instead oa anonymous tyoe
-        //    //var tuple = Tuple.Create<Product, decimal>(new Product(), 10M);
-
-        //    return from product in products
-        //           orderby product.AdjustedPrice
-        //           select product.Product;
-
-        //}
-
-        public static void withSeedData(this IMovieDatabase sourse)
+        /// <summary>Adds seed data to a database.</summary>
+        /// <param name="source">The data to seed.</param>
+        public static void WithSeedData(this IMovieDatabase source)
         {
-            sourse.Add(new Movie() { Title = "Pulp Fiction", Length = 154, IsOwned = true });
-            sourse.Add(new Movie() { Title = "Wonder Woman", Length = 141, });
-            sourse.Add(new Movie() { Title = "The Lion King", Length = 88, IsOwned = true });
-            sourse.Add(new Movie() { Title = "Full Metal Jacket", Length = 116, IsOwned = true });
+            source.Add(new Movie() { Title = "Pulp Fiction", Length = 154, IsOwned = true });
+            source.Add(new Movie() { Title = "Wonder Woman", Length = 141, });
+            source.Add(new Movie() { Title = "The Lion King", Length = 88, IsOwned = true });
+            source.Add(new Movie() { Title = "Full Metal Jacket", Length = 116, IsOwned = true });
         }
     }
 }

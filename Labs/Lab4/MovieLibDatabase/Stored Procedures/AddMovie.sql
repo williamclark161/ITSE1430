@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[AddProduct]
-	@name NVARCHAR(100),
-    @price MONEY,    
+﻿CREATE PROCEDURE [dbo].[AddMovie]
+	@title NVARCHAR(100),
+    @length INT,    
     @description NVARCHAR(MAX) = NULL,
-	@isDiscontinued BIT = 0
+	@isOwned BIT = 0
 AS BEGIN
     SET NOCOUNT ON;
 
-    INSERT INTO Products (Name, Price, Description, IsDiscontinued) VALUES (@name, @price, @description, @isDiscontinued)
+    INSERT INTO Movies (Title, Length, Description, IsOwned) VALUES (@title, @length, @description, @isOwned)
 
     SELECT SCOPE_IDENTITY()
 END

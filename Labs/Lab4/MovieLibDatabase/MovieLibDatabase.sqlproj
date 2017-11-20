@@ -61,12 +61,12 @@
     <Folder Include="Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Products.sql" />
-    <Build Include="Stored Procedures\AddProduct.sql" />
-    <Build Include="Stored Procedures\UpdateProduct.sql" />
-    <Build Include="Stored Procedures\GetAllProducts.sql" />
-    <Build Include="Stored Procedures\GetProduct.sql" />
-    <Build Include="Stored Procedures\RemoveProduct.sql" />
+    <Build Include="Tables\Movies.sql" />
+    <Build Include="Stored Procedures\AddMovie.sql" />
+    <Build Include="Stored Procedures\UpdateMovie.sql" />
+    <Build Include="Stored Procedures\GetAllMovies.sql" />
+    <Build Include="Stored Procedures\GetMovie.sql" />
+    <Build Include="Stored Procedures\RemoveMovie.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="InitializeProducts.PostDeployment.sql" />

@@ -1,10 +1,15 @@
-﻿using System;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.MovieDatabases
+namespace MovieLib.Data
 {
     /// <summary>Provides an implementation of <see cref="IMovieDatabase"/> using a memory collection.</summary>
     public class MemoryMovieDatabase : MovieDatabase
@@ -48,9 +53,6 @@ namespace MovieLib.MovieDatabases
 
             return from item in _movies
                    select CopyMovie(item);
-
-            //foreach (var movie in _movies)
-            //    yield return CopyMovie(movie);
         }
 
         /// <summary>Removes the movie.</summary>
@@ -77,17 +79,20 @@ namespace MovieLib.MovieDatabases
             return CopyMovie(newMovie);
         }
 
+        // Copies one movie to another
         private Movie CopyMovie(Movie movie)
         {
             if (movie == null)
                 return null;
 
-            var newMovie = new Movie();
-            newMovie.Id = movie.Id;
-            newMovie.Title = movie.Title;
-            newMovie.Description = movie.Description;
-            newMovie.Length = movie.Length;
-            newMovie.IsOwned = movie.IsOwned;
+            var newMovie = new Movie()
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                Description = movie.Description,
+                Length = movie.Length,
+                IsOwned = movie.IsOwned,
+            };
 
             return newMovie;
         }
@@ -98,14 +103,6 @@ namespace MovieLib.MovieDatabases
             return (from movie in _movies
                     where movie.Id == id
                     select movie).FirstOrDefault();
-
-            //foreach (var movie in _movies)
-            //{
-            //    if (movie.Id == id)
-            //        return movie;
-            //};
-
-            //return null;
         }
 
         private List<Movie> _movies = new List<Movie>();

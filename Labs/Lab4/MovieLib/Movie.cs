@@ -1,6 +1,6 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 3 - Movie Library Window Database Version
- * Programmer: William Clark - Crestworld
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
  */
 
 using System;
@@ -20,7 +20,7 @@ namespace MovieLib
         public int Id { get; set; }
 
 
-        /// <summary> Set the Movie Title. </summary>
+        /// <summary> Gets or sets the movie title. </summary>
         /// <value> Never Return NULL </value>
         public string Title
         {
@@ -29,7 +29,7 @@ namespace MovieLib
 
         }
 
-        /// <summary> Set the discription. </summary>
+        /// <summary> Gets or sets the movie discription. </summary>
         /// <value> Never Return NULL </value>
         public string Description
         {
@@ -42,12 +42,6 @@ namespace MovieLib
 
         /// <summary> Determines if Movie is Owned. </summary>
         public bool IsOwned { get; set; }
-
-        //public override string ToString()
-        //{
-        //    return Title;
-        //}
-
 
         /// <summary>Validates the object.</summary>
         /// <returns>The error message or null.</returns>
@@ -62,7 +56,10 @@ namespace MovieLib
                 yield return new ValidationResult("Length must be >= 0.", new[] { nameof(Length) });
         }
 
+        #region Private Members
+
         private string _title;
         private string _description;
+        #endregion
     }
 }

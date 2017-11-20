@@ -100,6 +100,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MovieLib.MovieDatabases.Sql\MovieLib.Data.Sql.csproj">
+      <Project>{cb435aa7-d47f-4370-b7f3-e3e73c39d441}</Project>
+      <Name>MovieLib.Data.Sql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieLib\MovieLib.csproj">
       <Project>{dca48664-6fc8-4569-9114-2d14d67bef94}</Project>
       <Name>MovieLib</Name>

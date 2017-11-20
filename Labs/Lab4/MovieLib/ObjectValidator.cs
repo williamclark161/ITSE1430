@@ -1,6 +1,6 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 3 - Movie Library Window Database Version
- * Programmer: William Clark - Crestworld
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
  */
 
 using System;
@@ -12,12 +12,13 @@ using System.Threading.Tasks;
 
 namespace MovieLib
 {
-    /// <summary>Tries to validate an object.</summary>
-    /// <param name="value">The value to validate.</param>
-    /// <param name="errors">The list of errors.</param>
-    /// <returns>true if validation succeeded or false otherwise.</returns>
+    /// <summary>Validate objects.</summary>
     public class ObjectValidator
     {
+        /// <summary>Tries to validate an object.</summary>
+        /// <param name="value">The value to validate.</param>
+        /// <param name="errors">The list of errors.</param>
+        /// <returns>true if validation succeeded or false otherwise.</returns>
         public static bool TryValidate(IValidatableObject value, out IEnumerable<ValidationResult> errors)
         {
             var context = new ValidationContext(value);

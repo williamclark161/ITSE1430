@@ -1,6 +1,6 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 3 - Movie Library Window Database Version
- * Programmer: William Clark - Crestworld
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
  */
 
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.MovieDatabases
+namespace MovieLib.Data
 {
     /// <summary>Provides a base implementation of <see cref="IMovieDatabase"/>.</summary>
     public abstract class MovieDatabase : IMovieDatabase
@@ -21,13 +21,11 @@ namespace MovieLib.MovieDatabases
         /// <exception cref="ValidationException"><paramref name="movie"/> is invalid.</exception>
         public Movie Add(Movie movie)
         {
-            // Validate
+            // Validate Movie Is Null
             if (movie == null)
                 throw new ArgumentNullException(nameof(movie), "Movie was null");
 
-            foreach (movie in _movies)
-
-            // Using IValidatableObject
+            // Validate Movie Using IValidatableObject
             ObjectValidator.Validate(movie);
 
 

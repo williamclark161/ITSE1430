@@ -1,6 +1,6 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 3 - Movie Library Window Database Version
- * Programmer: William Clark - Crestworld
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
  */
 
 using System;
@@ -32,11 +32,10 @@ namespace MovieLib.Windows
             Text = title;
         }
 
-        public MovieDetailForm(string title, Movie movie) : this(title)
-        {
-            Movie = movie;
-        }
         #endregion
+
+        /// <summary>Gets or sets the movie being shown.</summary>
+        public Movie Movie { get; set; }
 
         protected override void OnLoad(EventArgs e)
         {
@@ -53,9 +52,7 @@ namespace MovieLib.Windows
             ValidateChildren();
         }
 
-        /// <summary> Gets or sets the movie being shown. </summary>
-        public Movie Movie { get; set; }
-
+        #region Event Handlers
         /// <summary> Will stop what ever function that was called by the main form </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -65,11 +62,6 @@ namespace MovieLib.Windows
             Close();
         }
 
-        private void ShowError(string message, string title)
-        {
-            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        
         /// <summary> Will lock the four features of the movie entered by the user </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -78,8 +70,9 @@ namespace MovieLib.Windows
             if (!ValidateChildren())
             {
                 return;
-            }
-            
+            };
+
+            //Create a new movie
             var movie = new Movie()
             {
                 Id = Movie?.Id ?? 0,
@@ -101,13 +94,17 @@ namespace MovieLib.Windows
             Close();
         }
 
-        private int GetLength(TextBox conrtol)
+        /// <summary> Will validate the title of the movie. </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ValidatingTitle(object sender, EventArgs e)
         {
-            if (int.TryParse(_txtLength.Text, out int length))
-                return length;
+            var tb = sender as TextBox;
 
-            //Validate price            
-            return -1;
+            if (String.IsNullOrEmpty(tb.Text))
+                _errors.SetError(tb, "Title Is Required");
+            else
+                _errors.SetError(tb, "");
         }
 
         /// <summary> Will validate the movie length.  That it is >= 0. </summary>
@@ -125,20 +122,20 @@ namespace MovieLib.Windows
             else
                 _errors.SetError(_txtLength, "");
         }
+        #endregion
 
-        /// <summary> Will validate the title of the movie. </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ValidatingTitle(object sender, EventArgs e)
+        private int GetLength(TextBox conrtol)
         {
-            var tb = sender as TextBox;
+            if (int.TryParse(_txtLength.Text, out int length))
+                return length;
 
-            if (String.IsNullOrEmpty(tb.Text))
-            {
-                _errors.SetError(tb, "Title Is Required");
-            }
-            else
-                _errors.SetError(tb, "");
+            //Validate price            
+            return -1;
+        }
+
+        private void ShowError(string message, string title)
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

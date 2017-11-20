@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMovieDatabase.cs" />
-    <Compile Include="MovieDatabases\FileMovieDatabase.cs" />
-    <Compile Include="MovieDatabases\MemoryMovieDatabase.cs" />
-    <Compile Include="MovieDatabases\MovieDatabase.cs" />
+    <Compile Include="Data\FileMovieDatabase.cs" />
+    <Compile Include="Data\MemoryMovieDatabase.cs" />
+    <Compile Include="Data\MovieDatabase.cs" />
     <Compile Include="MovieDatabaseExtensions.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="ObjectValidator.cs" />

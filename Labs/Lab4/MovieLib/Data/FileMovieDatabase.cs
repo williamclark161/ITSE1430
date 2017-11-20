@@ -1,12 +1,18 @@
-﻿using System;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.MovieDatabases
+namespace MovieLib.Data
 {
+    /// <summary>Provides an implementation of <see cref="IMovieDatabase"/> using a memory collection.</summary>
     public class FileMovieDatabase : MemoryMovieDatabase
     {
         public FileMovieDatabase(string filename)
@@ -27,11 +33,11 @@ namespace MovieLib.MovieDatabases
         /// <returns>The added movie.</returns>
         protected override Movie AddCore(Movie movie)
         {
-            var newProduct = base.AddCore(movie);
+            var newMovie = base.AddCore(movie);
 
             SaveFile(_filename);
 
-            return newProduct;
+            return newMovie;
         }
 
         /// <summary>Removes the movie.</summary>
@@ -80,22 +86,9 @@ namespace MovieLib.MovieDatabases
         }
 
         private void SaveFile(string filename)
-        {
-            //Streaming
-            //StreamWriter writer = null;
-            //var stream = File.OpenWrite(filename);
-            //try
-            //{
-            //    //Write stuff
-            //    writer = new StreamWriter(stream);                
-            //} finally
-            //{
-            //    writer?.Dispose();
-            //    stream.Close();
-            //};            
+        {            
             using (var writer = new StreamWriter(filename))
             {
-                //Write stuff
                 foreach (var movie in GetAllCore())
                 {
                     var row = String.Join(",", movie.Id, movie.Title,
