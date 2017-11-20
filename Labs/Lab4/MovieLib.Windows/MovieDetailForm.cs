@@ -129,7 +129,7 @@ namespace MovieLib.Windows
             if (int.TryParse(_txtLength.Text, out int length))
                 return length;
 
-            //Validate price            
+            //Validate length
             return -1;
         }
 

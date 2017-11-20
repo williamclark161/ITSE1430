@@ -36,7 +36,7 @@ namespace MovieLib.Data
             catch (Exception e)
             {
                 //Throw different exception
-                throw new Exception("Add failed", e);
+                throw new Exception("Film Already In Library", e);
 
                 //Re-throw
                 throw;

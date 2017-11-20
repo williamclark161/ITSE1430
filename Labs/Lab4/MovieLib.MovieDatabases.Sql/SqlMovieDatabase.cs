@@ -63,8 +63,8 @@ namespace MovieLib.Data.Sql
                         {
                             Id = reader.IsDBNull(0) ? 0 : reader.GetInt32(0), //Grabs the first column of type Int
                             Title = reader.GetFieldValue<string>(1), //Grabs the second column of type String
-                            Description = reader.GetString(2), //Grabs the third column of type String
-                            Length = reader.GetInt32(3), //Grabs the fourth column of type Decimal
+                            Length = reader.GetInt32(2), //Grabs the fourth column of type Int
+                            Description = reader.GetString(3), //Grabs the third column of type String
                             IsOwned = reader.GetBoolean(4) //Grabs the fifth column of type Boolean
                         };
                         movies.Add(movie);
@@ -103,10 +103,10 @@ namespace MovieLib.Data.Sql
                         return new Movie()
                         {
                             Id = Convert.ToInt32(row["id"]),
-                            Title = row.Field<string>("Name"),
+                            Title = row.Field<string>("Title"),
                             Description = row.Field<string>("Description"),
-                            Length = row.Field<Int32>("Price"),
-                            IsOwned = row.Field<bool>("IsDiscontinued")
+                            Length = row.Field<Int32>("Length"),
+                            IsOwned = row.Field<bool>("IsOwned")
                         };
                     };
                 };
