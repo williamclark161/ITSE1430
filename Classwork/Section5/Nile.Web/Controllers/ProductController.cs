@@ -2,6 +2,7 @@
 using Nile.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Nile.Web.Controllers
 {
+    [DescriptionAttribute("Handels Product requests")]
     public class ProductController : Controller
     {
         public ProductController() : this(GetDatabase())
@@ -27,14 +29,73 @@ namespace Nile.Web.Controllers
             return View(model);
         }
 
-        //public ActionResult Add (ProductViewModel model)
-        //{
+        [HttpPost]
+        public ActionResult Add (ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _database.Add(model.ToDomain());
 
-        //}
+                    return RedirectToAction("List");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _database.Get(model.Id);
+
+                    return RedirectToAction("List");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _database.Remove(model.Id);
+
+                    return RedirectToAction("List");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
 
         public ActionResult Edit(int id) // must be id
         {
             var product = _database.Get(id);
+            if (product == null)
+                return HttpNotFound();
+
+            var value = product.CalculatedProperty;
 
             return View(product.ToModel());
         }
@@ -42,6 +103,8 @@ namespace Nile.Web.Controllers
         public ActionResult Delete(int id) // must be id
         {
             var product = _database.Get(id);
+            if (product == null)
+                return HttpNotFound();
 
             return View(product.ToModel());
         }

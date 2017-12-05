@@ -14,6 +14,7 @@ namespace MovieLib.Web.Controllers
         public MovieController() : this(GetDatabase())
         {
         }
+
         public MovieController(IMovieDatabase database)
         {
             _database = database;
@@ -26,14 +27,71 @@ namespace MovieLib.Web.Controllers
             return View(model);
         }
 
-        //public ActionResult Add(MovieViewModel model)
-        //{
+        [HttpPost]
+        public ActionResult Add(MovieViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _database.Add(model.ToDomain());
 
-        //}
+                    return RedirectToAction("List");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(MovieViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _database.Get(model.Id);
+
+                    return RedirectToAction("List");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(MovieViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _database.Remove(model.Id);
+
+                    return RedirectToAction("List");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
 
         public ActionResult Edit(int id)
         {
             var movie = _database.Get(id);
+            if (movie == null)
+                return HttpNotFound();
 
             return View(movie.ToModel());
         }
@@ -41,6 +99,8 @@ namespace MovieLib.Web.Controllers
         public ActionResult Delete(int id)
         {
             var movie = _database.Get(id);
+            if (movie == null)
+                return HttpNotFound();
 
             return View(movie.ToModel());
         }
@@ -55,7 +115,7 @@ namespace MovieLib.Web.Controllers
 
         private static IMovieDatabase GetDatabase()
         {
-            var connstring = ConfigurationManager.ConnectionStrings["ProductDatabase"];
+            var connstring = ConfigurationManager.ConnectionStrings["MovieDatabase"];
 
             return new SqlMovieDatabase(connstring.ConnectionString);
         }

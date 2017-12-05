@@ -31,6 +31,7 @@ namespace Nile
             set => _description = value?.Trim(); 
         }
 
+        [Obsolete("Deprecated in V1. Use Something Else")]
         public decimal CalculatedProperty => 0M; //Converted to Getter Value.  Read Only Property.  DO NOT FORGET THE '=>'
         
         /// <summary>Gets or sets the price.</summary>
