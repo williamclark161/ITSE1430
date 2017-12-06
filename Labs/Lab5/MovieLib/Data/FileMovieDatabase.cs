@@ -52,9 +52,9 @@ namespace MovieLib.Data
         /// <summary>Updates a movie.</summary>
         /// <param name="movie">The movie to update.</param>
         /// <returns>The updated movie.</returns>
-        protected override Movie UpdateCore(Movie existing, Movie movie)
+        protected override Movie UpdateCore(Movie movie)
         {
-            var newMovie = base.UpdateCore(existing, movie);
+            var newMovie = base.UpdateCore(movie);
             SaveFile(_filename);
 
             return newMovie;

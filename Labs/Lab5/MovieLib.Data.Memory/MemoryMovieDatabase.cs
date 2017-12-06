@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLib.Data
+namespace MovieLib.Data.Memory
 
 {
     /// <summary>Provides an implementation of <see cref="IMovieDatabase"/> using a memory collection.</summary>
@@ -32,7 +32,7 @@ namespace MovieLib.Data
         /// <returns>The movie, if any.</returns>
         protected override Movie FindByTitleCore(string title)
         {
-            return _movies.FirstOrDefault(m => String.Compare(m.Title, title, true) == 0);
+            return _movies.FirstOrDefault(movie => String.Compare(movie.Title, title, true) == 0);
         }
         
         /// <summary>Get a specific movie.</summary>
@@ -57,9 +57,9 @@ namespace MovieLib.Data
         /// <param name="movie">The movie to remove.</param>
         protected override void RemoveCore(int id)
         {
-            var movie = FindMovie(id);
-            if (movie != null)
-                _movies.Remove(movie);
+            var existingMovie = FindMovie(id);
+            if (existingMovie != null)
+                _movies.Remove(existingMovie);
         }
 
         /// <summary>Updates a movie.</summary>
@@ -104,9 +104,11 @@ namespace MovieLib.Data
         //Find a movie by ID
         private Movie FindMovie(int id)
         {
-            return (from movie in _movies
-                    where movie.Id == id
-                    select movie).FirstOrDefault();
+            //return (from movie in _movies
+            //        where movie.Id == id
+            //        select movie).FirstOrDefault();
+
+            return _movies.FirstOrDefault(movie => movie.Id == id);
         }
 
         private readonly List<Movie> _movies = new List<Movie>();

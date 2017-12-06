@@ -29,18 +29,13 @@ namespace MovieLib.Data
             ObjectValidator.Validate(movie);
 
 
-            try
-            {
-                return AddCore(movie);
-            }
-            catch (Exception e)
-            {
-                //Throw different exception
-                throw new Exception("Film Already In Library", e);
+            //Movie cannot already exist
+            var existing = FindByTitleCore(movie.Title);
+            if (existing != null)
+                throw new ArgumentException("Movie with same title already exists in the Library.", nameof(movie));
 
-                //Re-throw
-                throw;
-            }
+            //Create the new movie
+            return AddCore(movie);
         }
 
         /// <summary>Get a specific movie.</summary>
@@ -64,13 +59,18 @@ namespace MovieLib.Data
 
         /// <summary>Removes the movie.</summary>
         /// <param name="movie">The movie to remove.</param>
-        public void Remove(int id)
+        public bool Remove(int id)
         {
             // Validate
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
+            var existing = GetCore(id);
+            if (existing == null)
+                return false;
+
             RemoveCore(id);
+            return true;
         }
 
         /// <summary>Updates a movie.</summary>
@@ -84,13 +84,20 @@ namespace MovieLib.Data
 
             // Using IValidatableObject
             ObjectValidator.Validate(movie);
-            
-            //Get existing movie
-            var existing = GetCore(movie.Id) ?? throw new Exception("Movie not found.");
-            //if (existing == null)
-            //    return null;
 
-            return UpdateCore(existing, movie);
+            //Get existing movie
+            var existing = GetCore(movie.Id);
+            if (existing == null)
+                throw new ArgumentException("Move does not exist in library.");
+
+            //Movie title cannot already exist
+            existing = FindByTitleCore(movie.Title);
+            if (existing != null && existing.Id != movie.Id)
+                throw new ArgumentException("Movie with same title already exists in library.", nameof(movie));
+
+
+
+            return UpdateCore(movie);
         }
 
         #region Protected Members
@@ -99,6 +106,11 @@ namespace MovieLib.Data
         /// <param name="movie">The movie to add.</param>
         /// <returns>The added movie.</returns>
         protected abstract Movie AddCore(Movie movie);
+
+        /// <summary>Finds a movie by its title.</summary>
+        /// <param name="title">The title.</param>
+        /// <returns>The movie, if any.</returns>
+        protected abstract Movie FindByTitleCore(string title);
 
         /// <summary>Get a movie given its ID.</summary>
         /// <param name="id">The ID.</param>
@@ -115,9 +127,7 @@ namespace MovieLib.Data
         /// <param name="existing">The existing movie.</param>
         /// <param name="newItem">The movie to update.</param>
         /// <returns>The updated movie.</returns>
-        protected abstract Movie UpdateCore(Movie existing, Movie newItem);
-
-        
+        protected abstract Movie UpdateCore(Movie newItem);
         #endregion
     }
 }

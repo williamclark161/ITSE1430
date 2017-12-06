@@ -34,7 +34,7 @@ namespace MovieLib.Data.Sql
                 var cmd = new SqlCommand("AddMovie", connection)
                 { CommandType = CommandType.StoredProcedure };
 
-                cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = movie.Title;
+                cmd.Parameters.AddWithValue("@title", SqlDbType.VarChar).Value = movie.Title;
                 cmd.Parameters.AddWithValue("@description", movie.Description);
                 cmd.Parameters.AddWithValue("@length", movie.Length);
                 cmd.Parameters.AddWithValue("@isOwned", movie.IsOwned);
@@ -45,35 +45,12 @@ namespace MovieLib.Data.Sql
             return GetCore(id);
         }
 
-        protected override IEnumerable<Movie> GetAllCore()
+        protected override Movie FindByTitleCore(string title)
         {
-            var movies = new List<Movie>();
-            using (var connection = OpenDatabase())
-            {
-                //command.CreatCommand();
-                var cmd = new SqlCommand("GetAllMovies", connection);
-                cmd.CommandType = CommandType.StoredProcedure;
+            //Not supported directly
+            var movies = GetAllCore();
 
-
-                using (var reader = cmd.ExecuteReader())  // returns a dbReader
-                {
-                    while (reader.Read()) // Efficiently Reads the database
-                    {
-                        var movie = new Movie()
-                        {
-                            Id = reader.IsDBNull(0) ? 0 : reader.GetInt32(0), //Grabs the first column of type Int
-                            Title = reader.GetFieldValue<string>(1), //Grabs the second column of type String
-                            Length = reader.GetInt32(2), //Grabs the fourth column of type Int
-                            Description = reader.GetString(3), //Grabs the third column of type String
-                            IsOwned = reader.GetBoolean(4) //Grabs the fifth column of type Boolean
-                        };
-                        movies.Add(movie);
-                    };
-                };
-
-
-                return movies;
-            };
+            return movies.FirstOrDefault(m => String.Compare(m.Title, title, true) == 0);
         }
 
         protected override Movie GetCore(int id)
@@ -115,6 +92,39 @@ namespace MovieLib.Data.Sql
             return null;
         }
 
+        protected override IEnumerable<Movie> GetAllCore()
+        {
+            var movies = new List<Movie>();
+            using (var connection = OpenDatabase())
+            {
+                //command.CreatCommand();
+                var cmd = new SqlCommand("GetAllMovies", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                using (var reader = cmd.ExecuteReader())  // returns a dbReader
+                {
+                    while (reader.Read()) // Efficiently Reads the database
+                    {
+                        var movie = new Movie()
+                        {
+                            Id = reader.IsDBNull(0) ? 0 : reader.GetInt32(0), //Grabs the first column of type Int
+                            Title = reader.GetFieldValue<string>(1), //Grabs the second column of type String
+                            Length = reader.GetInt32(2), //Grabs the fourth column of type Int
+                            Description = reader.GetString(3), //Grabs the third column of type String
+                            IsOwned = reader.GetBoolean(4) //Grabs the fifth column of type Boolean
+                        };
+                        movies.Add(movie);
+                    };
+                };
+
+
+                return movies;
+            };
+        }
+
+        
+
         protected override void RemoveCore(int id)
         {
             using (var connection = OpenDatabase())
@@ -125,20 +135,20 @@ namespace MovieLib.Data.Sql
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 var paramenter = new SqlParameter("@id", id);
-                cmd.Parameters.Add(paramenter);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 cmd.ExecuteNonQuery();
             };
         }
 
-        protected override Movie UpdateCore(Movie existing, Movie movie)
+        protected override Movie UpdateCore(Movie movie)
         {
             using (var connection = OpenDatabase())
             {
                 var cmd = new SqlCommand("UpdateMovie", connection)
                 { CommandType = CommandType.StoredProcedure };
 
-                cmd.Parameters.AddWithValue("@id", existing.Id);
+                cmd.Parameters.AddWithValue("@id", movie.Id);
                 cmd.Parameters.AddWithValue("@title", movie.Title);
                 cmd.Parameters.AddWithValue("@description", movie.Description);
                 cmd.Parameters.AddWithValue("@length", movie.Length);
@@ -147,7 +157,7 @@ namespace MovieLib.Data.Sql
                 cmd.ExecuteNonQuery();
             };
 
-            return GetCore(existing.Id);
+            return movie;
         }
 
         private SqlConnection OpenDatabase()

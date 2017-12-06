@@ -30,10 +30,12 @@ namespace MovieLib
         /// <returns>The movie.</returns>
         IEnumerable<Movie> GetAll();
 
-        /// <summary>Removes the movie.</summary>
-        /// <param name="id">The movie to remove.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> must be greater than or equal to 0.</exception>
-        void Remove(int id);
+        /// <summary>Removes a movie.</summary>
+        /// <param name="id">The ID of the movie.</param>
+        /// <returns>True if successful or false otherwise.</returns>
+        /// <remarks>If the movie does not exist then nothing happens.</remarks>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> is less than or equal to zero.</exception>
+        bool Remove(int id);
 
         /// <summary>Updates a movie.</summary>
         /// <param name="movie">The movie to update.</param>
