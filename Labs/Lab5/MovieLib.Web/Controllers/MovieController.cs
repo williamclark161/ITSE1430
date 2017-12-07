@@ -2,6 +2,7 @@
 using MovieLib.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace MovieLib.Web.Controllers
 {
+    [DescriptionAttribute("Handels Product requests")]
     public class MovieController : Controller
     {
         public MovieController() : this(GetDatabase())

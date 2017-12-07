@@ -123,6 +123,6 @@ namespace Nile.Web.Controllers
 
             return new SqlProductDatabase(connstring.ConnectionString);
         }
-        private readonly IProductDatabase _database;
+        private IProductDatabase _database;
     }
 }
