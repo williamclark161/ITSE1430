@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MovieLib.Web.Models.MovieViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
 }
 
-<h2>Index</h2>
+<h2>CocoaVision Movie Library</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Add")
+    @Html.ActionLink("Add", "Add")
 </p>
 <table class="table">
     <tr>
@@ -42,7 +42,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

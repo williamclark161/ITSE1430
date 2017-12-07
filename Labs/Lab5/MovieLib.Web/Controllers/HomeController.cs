@@ -15,7 +15,7 @@ namespace MovieLib.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "What To Know About CocoaVision and Crestworld";
 
             return View();
         }

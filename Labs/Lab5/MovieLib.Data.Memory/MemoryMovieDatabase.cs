@@ -50,6 +50,7 @@ namespace MovieLib.Data.Memory
         {
 
             return from item in _movies
+                   orderby item.Title ascending
                    select CloneMovie(item);
         }
 
