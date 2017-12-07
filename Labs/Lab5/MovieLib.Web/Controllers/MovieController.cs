@@ -56,7 +56,7 @@ namespace MovieLib.Web.Controllers
             {
                 try
                 {
-                    _database.Get(model.Id);
+                    _database.Update(model.ToDomain());
 
                     return RedirectToAction("List");
                 }
@@ -72,20 +72,17 @@ namespace MovieLib.Web.Controllers
         [HttpPost]
         public ActionResult Delete(MovieViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _database.Remove(model.Id);
+                _database.Remove(model.Id);
 
-                    return RedirectToAction("List");
-                }
-                catch (Exception e)
-                {
-                    ModelState.AddModelError("", e.Message);
-                };
+                return RedirectToAction("List");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
             };
-
+            
             return View(model);
         }
 

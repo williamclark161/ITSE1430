@@ -56,7 +56,7 @@ namespace Nile.Web.Controllers
             {
                 try
                 {
-                    _database.Get(model.Id);
+                    _database.Update(model.ToDomain());
 
                     return RedirectToAction("List");
                 }
@@ -72,18 +72,15 @@ namespace Nile.Web.Controllers
         [HttpPost]
         public ActionResult Delete(ProductViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _database.Remove(model.Id);
+                _database.Remove(model.Id);
 
-                    return RedirectToAction("List");
-                }
-                catch (Exception e)
-                {
-                    ModelState.AddModelError("", e.Message);
-                };
+                return RedirectToAction("List");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
             };
 
             return View(model);
@@ -95,7 +92,7 @@ namespace Nile.Web.Controllers
             if (product == null)
                 return HttpNotFound();
 
-            var value = product.CalculatedProperty;
+            //var value = product.CalculatedProperty;
 
             return View(product.ToModel());
         }
