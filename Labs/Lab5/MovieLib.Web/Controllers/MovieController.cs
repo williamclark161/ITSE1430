@@ -1,4 +1,9 @@
-﻿using MovieLib.Data.Sql;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 5 - Movie Library Web Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+
+ using MovieLib.Data.Sql;
 using MovieLib.Web.Models;
 using System;
 using System.Collections.Generic;

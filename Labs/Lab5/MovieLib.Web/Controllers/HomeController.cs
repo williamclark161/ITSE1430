@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 5 - Movie Library Web Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,13 +15,6 @@ namespace MovieLib.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "What To Know About CocoaVision and Crestworld";
-
             return View();
         }
     }

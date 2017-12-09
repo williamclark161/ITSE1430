@@ -4,4 +4,5 @@ AS BEGIN
 
     SELECT Id, Title, Length, Description, IsOwned
     FROM Movies
+	ORDER BY Title ASC
 END

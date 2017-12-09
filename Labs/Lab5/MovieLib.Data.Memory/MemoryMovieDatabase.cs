@@ -1,8 +1,8 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Project: Lab 5 - Movie Library Web Version
  * Programmer: William Clark - CocoaVision/Crestworld
  */
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +50,6 @@ namespace MovieLib.Data.Memory
         {
 
             return from item in _movies
-                   orderby item.Title ascending
                    select CloneMovie(item);
         }
 
