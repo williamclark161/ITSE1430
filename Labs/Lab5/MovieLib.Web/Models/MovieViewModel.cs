@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 5 - Movie Library Web Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+ 
+ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

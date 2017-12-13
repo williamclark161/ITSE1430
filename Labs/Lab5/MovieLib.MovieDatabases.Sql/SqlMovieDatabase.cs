@@ -1,9 +1,9 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Project: Lab 5 - Movie Library Web Version
  * Programmer: William Clark - CocoaVision/Crestworld
  */
- 
- using System;
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Class: ITSE-1430 C# Programming
+ * Project: Lab 5 - Movie Library Web Version
+ * Programmer: William Clark - CocoaVision/Crestworld
+ */
+ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +15,7 @@ namespace MovieLib.Web.Models
         public static IEnumerable<MovieViewModel> ToModel(this IEnumerable<Movie> source)
         {
             return from item in source
+                   orderby item.Title ascending
                    select item.ToModel();
         }
 

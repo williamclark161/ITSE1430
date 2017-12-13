@@ -1,5 +1,5 @@
 ﻿/* Class: ITSE-1430 C# Programming
- * Project: Lab 4 - Movie Library Window Database SQL Version
+ * Project: Lab 5 - Movie Library Web Version
  * Programmer: William Clark - CocoaVision/Crestworld
  */
 
@@ -32,7 +32,7 @@ namespace MovieLib.Data
             //Movie cannot already exist
             var existing = FindByTitleCore(movie.Title);
             if (existing != null)
-                throw new ArgumentException("Movie with same title already exists in the Library.", nameof(movie));
+                throw new ArgumentException("Movie with same title already exists in the Library." + movie);
 
             //Create the new movie
             return AddCore(movie);
@@ -88,12 +88,12 @@ namespace MovieLib.Data
             //Get existing movie
             var existing = GetCore(movie.Id);
             if (existing == null)
-                throw new ArgumentException("Move does not exist in library.");
+                throw new ArgumentException("Movie does not exist in library.");
 
             //Movie title cannot already exist
             existing = FindByTitleCore(movie.Title);
             if (existing != null && existing.Id != movie.Id)
-                throw new ArgumentException("Movie with same title already exists in library.", nameof(existing));
+                throw new ArgumentException("Movie with same title already exists in library.");
 
 
 
