@@ -93,7 +93,7 @@ namespace MovieLib.Data
             //Movie title cannot already exist
             existing = FindByTitleCore(movie.Title);
             if (existing != null && existing.Id != movie.Id)
-                throw new ArgumentException("Movie with same title already exists in library.", nameof(movie));
+                throw new ArgumentException("Movie with same title already exists in library.", nameof(existing));
 
 
 
