@@ -1,5 +1,7 @@
 ﻿/*
- * ITSE1430
+ * ITSE 1430
+ * William Clark
+ * Final Exam - 12/13/2014
  */
 using System;
 using System.Collections.Generic;
