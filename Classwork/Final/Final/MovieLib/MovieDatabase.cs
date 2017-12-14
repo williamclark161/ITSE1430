@@ -26,7 +26,19 @@ namespace MovieLib.Data
             //Movie cannot already exist
             var existing = FindByTitleCore(movie.Title);
             if (existing != null)
-                throw new ArgumentException("Movie with same title already exists.", nameof(movie));
+                throw new ArgumentException("Movie with same title already exists.");
+
+            //Movie title cannot be less than 2 characters
+            if (movie.Title.Length < 2)
+                throw new ArgumentException("Movie title is too short.");
+
+            //Movie title cannot be more than 100 characters
+            if (movie.Title.Length > 100)
+                throw new ArgumentException("Movie title is too long.");
+
+            //Movie Release Year must be between 1900 and 2100
+            if (movie.ReleaseYear < 1900 || movie.ReleaseYear > 2100)
+                throw new ArgumentOutOfRangeException("Release Year is out of range.  Must be between 1900 and 2100");
 
             //Create the new movie
             return AddCore(movie);
@@ -46,7 +58,7 @@ namespace MovieLib.Data
 
         /// <summary>Gets all the movies.</summary>
         /// <returns>The list of movies.</returns>
-        public IEnumerable<Movie> Getall ()
+        public IEnumerable<Movie> GetAll ()
         {
             return GetAllCore();
         }
@@ -91,12 +103,24 @@ namespace MovieLib.Data
             //Get the existing movie
             var existing = GetCore(movie.Id);
             if (existing == null)
-                throw new ArgumentException("Move does not exist.");
+                throw new ArgumentException("Movie does not exist.");
 
             //Movie title cannot already exist
             existing = FindByTitleCore(movie.Title);
             if (existing != null && existing.Id != movie.Id)
-                throw new ArgumentException("Movie with same title already exists.", nameof(movie));
+                throw new ArgumentException("Movie with same title already exists.");
+
+            //Movie title cannot be less than 2 characters
+            if (movie.Title.Length < 2)
+                throw new ArgumentException("Movie title is too short.");
+
+            //Movie title cannot be more than 100 characters
+            if (movie.Title.Length > 100)
+                throw new ArgumentException("Movie title is too long.");
+
+            //Movie Release Year must be between 1900 and 2100
+            if (movie.ReleaseYear < 1900 || movie.ReleaseYear > 2100)
+                throw new ArgumentOutOfRangeException("Release Year is out of range.  Must be between 1900 and 2100");
                                   
             return UpdateCore(movie);
         }
